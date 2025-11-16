@@ -3,202 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zen Leaf - A Journey in Every Cup</title>
+    <title>🌈 Story Time for Kids</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="logo">禅茶 Zen Leaf</div>
-            <ul class="nav-links">
-                <li><a href="#collection">Collection</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
-                <li><a href="#ritual">Ritual</a></li>
-                <li><a href="#contact">Connect</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title fade-in">
-                <span class="line">Where Stillness</span>
-                <span class="line">Meets Serenity</span>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">
+                <span class="emoji-bounce">📚</span>
+                Story Time
+                <span class="emoji-bounce">✨</span>
             </h1>
-            <p class="hero-subtitle fade-in-delay">A mindful blend of ancient wisdom and modern craft</p>
-            <a href="#collection" class="cta-button fade-in-delay-2">Begin Your Journey</a>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll to Explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
+            <p class="subtitle">Choose your adventure!</p>
+        </header>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="philosophy">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Philosophy</span>
-                <h2 class="section-title">
-                    In every leaf,<br>
-                    a moment of peace
-                </h2>
+        <!-- Story Library -->
+        <div class="story-grid">
+            <!-- Story 1: The Magic Garden -->
+            <div class="story-card" onclick="openStory('magic-garden')">
+                <div class="story-icon">🌸</div>
+                <h2 class="story-title">The Magic Garden</h2>
+                <p class="story-description">Interactive & Musical</p>
+                <div class="stars">⭐⭐⭐</div>
             </div>
-            <div class="philosophy-grid">
-                <div class="philosophy-card">
-                    <div class="card-icon">🍃</div>
-                    <h3>Sourced with Intention</h3>
-                    <p>Each leaf hand-picked from mist-covered mountains, where time moves slowly and nature speaks softly.</p>
-                </div>
-                <div class="philosophy-card">
-                    <div class="card-icon">🌙</div>
-                    <h3>Crafted with Care</h3>
-                    <p>Traditional methods meet modern mindfulness, preserving the essence of centuries-old tea ceremonies.</p>
-                </div>
-                <div class="philosophy-card">
-                    <div class="card-icon">☯</div>
-                    <h3>Savored with Presence</h3>
-                    <p>More than a beverage—an invitation to pause, breathe, and find stillness in the chaos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Collection Section -->
-    <section id="collection" class="collection">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Collection</span>
-                <h2 class="section-title">
-                    Whispers of<br>
-                    the Mountain
-                </h2>
+            <!-- Story 2: Space Adventure -->
+            <div class="story-card" onclick="openStory('space-adventure')">
+                <div class="story-icon">🚀</div>
+                <h2 class="story-title">Space Adventure</h2>
+                <p class="story-description">Animated Journey</p>
+                <div class="stars">⭐⭐⭐</div>
             </div>
-            <div class="tea-grid">
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #d4e8d4 0%, #a8d5a8 100%);">
-                        <span class="tea-type">Green</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Morning Dew</h3>
-                        <p class="tea-description">A gentle awakening, like dawn breaking over jade hills</p>
-                        <p class="tea-price">$28</p>
-                    </div>
-                </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #f5e6d3 0%, #d4b896 100%);">
-                        <span class="tea-type">Oolong</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Autumn Whisper</h3>
-                        <p class="tea-description">Balance in every sip, where earth meets sky</p>
-                        <p class="tea-price">$32</p>
-                    </div>
-                </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #e8d4d4 0%, #c5a3a3 100%);">
-                        <span class="tea-type">Black</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Evening Ember</h3>
-                        <p class="tea-description">Rich and grounding, a companion for quiet contemplation</p>
-                        <p class="tea-price">$30</p>
-                    </div>
-                </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #f0f0e8 0%, #d8d8c8 100%);">
-                        <span class="tea-type">White</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Cloud's Dance</h3>
-                        <p class="tea-description">Delicate and pure, like petals on still water</p>
-                        <p class="tea-price">$35</p>
-                    </div>
-                </div>
+
+            <!-- Story 3: Ocean Friends -->
+            <div class="story-card" onclick="openStory('ocean-friends')">
+                <div class="story-icon">🐠</div>
+                <h2 class="story-title">Ocean Friends</h2>
+                <p class="story-description">Interactive Fun</p>
+                <div class="stars">⭐⭐⭐</div>
+            </div>
+
+            <!-- Story 4: Forest Animals -->
+            <div class="story-card" onclick="openStory('forest-animals')">
+                <div class="story-icon">🦊</div>
+                <h2 class="story-title">Forest Friends</h2>
+                <p class="story-description">Musical Tale</p>
+                <div class="stars">⭐⭐⭐</div>
+            </div>
+
+            <!-- Story 5: Rainbow Kingdom -->
+            <div class="story-card" onclick="openStory('rainbow-kingdom')">
+                <div class="story-icon">🌈</div>
+                <h2 class="story-title">Rainbow Kingdom</h2>
+                <p class="story-description">Colorful Adventure</p>
+                <div class="stars">⭐⭐⭐</div>
+            </div>
+
+            <!-- Story 6: Dinosaur Day -->
+            <div class="story-card" onclick="openStory('dinosaur-day')">
+                <div class="story-icon">🦕</div>
+                <h2 class="story-title">Dinosaur Day</h2>
+                <p class="story-description">Prehistoric Fun</p>
+                <div class="stars">⭐⭐⭐</div>
             </div>
         </div>
-    </section>
 
-    <!-- Ritual Section -->
-    <section id="ritual" class="ritual">
-        <div class="container">
-            <div class="ritual-content">
-                <div class="ritual-text">
-                    <span class="section-label">The Ritual</span>
-                    <h2 class="section-title">
-                        The art of<br>
-                        being present
-                    </h2>
-                    <div class="ritual-steps">
-                        <div class="ritual-step">
-                            <span class="step-number">01</span>
-                            <p>Heat water until small bubbles rise—not boiling, but breathing</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">02</span>
-                            <p>Place leaves gently in your vessel, honoring their journey</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">03</span>
-                            <p>Pour with intention, watching the leaves unfurl their stories</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">04</span>
-                            <p>Breathe in the aroma, let time slow, and simply be</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ritual-visual">
-                    <div class="circle-zen"></div>
-                </div>
-            </div>
+        <!-- Audio Toggle -->
+        <div class="audio-control">
+            <button class="audio-btn" onclick="toggleMusic()">
+                <span id="music-icon">🔊</span>
+                <span id="music-text">Music On</span>
+            </button>
         </div>
-    </section>
+    </div>
 
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <blockquote class="zen-quote">
-            <p>"Tea is not just a drink,</p>
-            <p>but a meditation in motion,</p>
-            <p>a poem written in steam."</p>
-        </blockquote>
-    </section>
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="audio/background.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>禅茶 Zen Leaf</h3>
-                    <p>Cultivating moments of peace,<br>one cup at a time</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Explore</h4>
-                        <ul>
-                            <li><a href="#collection">Tea Collection</a></li>
-                            <li><a href="#philosophy">Our Story</a></li>
-                            <li><a href="#ritual">Brewing Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#">Newsletter</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Zen Leaf. All rights reserved. Crafted with mindfulness.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
