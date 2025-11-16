@@ -3,201 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zen Leaf - A Journey in Every Cup</title>
+    <title>Healing Space - AI Therapy Companion</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="logo">禅茶 Zen Leaf</div>
+            <div class="logo">Healing Space</div>
             <ul class="nav-links">
-                <li><a href="#collection">Collection</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
-                <li><a href="#ritual">Ritual</a></li>
-                <li><a href="#contact">Connect</a></li>
+                <li><a href="#home" data-section="home">Home</a></li>
+                <li><a href="#chat" data-section="chat">Talk</a></li>
+                <li><a href="#journal" data-section="journal">Journal</a></li>
+                <li><a href="#mood" data-section="mood">Mood Tracker</a></li>
+                <li><a href="#resources" data-section="resources">Resources</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title fade-in">
-                <span class="line">Where Stillness</span>
-                <span class="line">Meets Serenity</span>
-            </h1>
-            <p class="hero-subtitle fade-in-delay">A mindful blend of ancient wisdom and modern craft</p>
-            <a href="#collection" class="cta-button fade-in-delay-2">Begin Your Journey</a>
+    <!-- Crisis Banner -->
+    <div class="crisis-banner" id="crisisBanner">
+        <div class="crisis-content">
+            <strong>In Crisis?</strong> Call 988 (Suicide & Crisis Lifeline) or text "HELLO" to 741741 (Crisis Text Line)
+            <button class="crisis-close" onclick="closeCrisisBanner()">×</button>
         </div>
-        <div class="scroll-indicator">
-            <span>Scroll to Explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
+    </div>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="philosophy">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Philosophy</span>
-                <h2 class="section-title">
-                    In every leaf,<br>
-                    a moment of peace
-                </h2>
-            </div>
-            <div class="philosophy-grid">
-                <div class="philosophy-card">
-                    <div class="card-icon">🍃</div>
-                    <h3>Sourced with Intention</h3>
-                    <p>Each leaf hand-picked from mist-covered mountains, where time moves slowly and nature speaks softly.</p>
-                </div>
-                <div class="philosophy-card">
-                    <div class="card-icon">🌙</div>
-                    <h3>Crafted with Care</h3>
-                    <p>Traditional methods meet modern mindfulness, preserving the essence of centuries-old tea ceremonies.</p>
-                </div>
-                <div class="philosophy-card">
-                    <div class="card-icon">☯</div>
-                    <h3>Savored with Presence</h3>
-                    <p>More than a beverage—an invitation to pause, breathe, and find stillness in the chaos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">A Safe Space for Healing</h1>
+                <p class="hero-subtitle">Your AI companion for emotional support and self-discovery</p>
 
-    <!-- Collection Section -->
-    <section id="collection" class="collection">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Collection</span>
-                <h2 class="section-title">
-                    Whispers of<br>
-                    the Mountain
-                </h2>
-            </div>
-            <div class="tea-grid">
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #d4e8d4 0%, #a8d5a8 100%);">
-                        <span class="tea-type">Green</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Morning Dew</h3>
-                        <p class="tea-description">A gentle awakening, like dawn breaking over jade hills</p>
-                        <p class="tea-price">$28</p>
-                    </div>
+                <div class="disclaimer-card">
+                    <h3>Important Notice</h3>
+                    <p>This AI companion provides emotional support and coping strategies, but is NOT a replacement for professional therapy or medical treatment. If you're experiencing a mental health crisis, please contact emergency services or a crisis hotline immediately.</p>
+                    <ul class="disclaimer-list">
+                        <li>All conversations are private and stored only in your browser</li>
+                        <li>This tool uses simulated AI responses for supportive conversation</li>
+                        <li>For serious mental health concerns, please consult a licensed professional</li>
+                    </ul>
+                    <button class="cta-button" onclick="navigateToSection('chat')">Begin Your Journey</button>
                 </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #f5e6d3 0%, #d4b896 100%);">
-                        <span class="tea-type">Oolong</span>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Supportive Chat</h3>
+                        <p>Express your feelings in a safe, judgment-free environment</p>
                     </div>
-                    <div class="tea-info">
-                        <h3>Autumn Whisper</h3>
-                        <p class="tea-description">Balance in every sip, where earth meets sky</p>
-                        <p class="tea-price">$32</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">📔</div>
+                        <h3>Personal Journal</h3>
+                        <p>Track your thoughts and emotional journey over time</p>
                     </div>
-                </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #e8d4d4 0%, #c5a3a3 100%);">
-                        <span class="tea-type">Black</span>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌈</div>
+                        <h3>Mood Tracking</h3>
+                        <p>Monitor your emotional patterns and progress</p>
                     </div>
-                    <div class="tea-info">
-                        <h3>Evening Ember</h3>
-                        <p class="tea-description">Rich and grounding, a companion for quiet contemplation</p>
-                        <p class="tea-price">$30</p>
-                    </div>
-                </div>
-                <div class="tea-card">
-                    <div class="tea-image" style="background: linear-gradient(135deg, #f0f0e8 0%, #d8d8c8 100%);">
-                        <span class="tea-type">White</span>
-                    </div>
-                    <div class="tea-info">
-                        <h3>Cloud's Dance</h3>
-                        <p class="tea-description">Delicate and pure, like petals on still water</p>
-                        <p class="tea-price">$35</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Coping Tools</h3>
+                        <p>Access evidence-based techniques for managing difficult emotions</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ritual Section -->
-    <section id="ritual" class="ritual">
+    <!-- Chat Section -->
+    <section id="chat" class="section">
         <div class="container">
-            <div class="ritual-content">
-                <div class="ritual-text">
-                    <span class="section-label">The Ritual</span>
-                    <h2 class="section-title">
-                        The art of<br>
-                        being present
-                    </h2>
-                    <div class="ritual-steps">
-                        <div class="ritual-step">
-                            <span class="step-number">01</span>
-                            <p>Heat water until small bubbles rise—not boiling, but breathing</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">02</span>
-                            <p>Place leaves gently in your vessel, honoring their journey</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">03</span>
-                            <p>Pour with intention, watching the leaves unfurl their stories</p>
-                        </div>
-                        <div class="ritual-step">
-                            <span class="step-number">04</span>
-                            <p>Breathe in the aroma, let time slow, and simply be</p>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>Talk to Your AI Companion</h2>
+                    <button class="btn-secondary" onclick="clearChat()">Clear Conversation</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>Hello, I'm here to listen and support you. This is a safe space where you can share what's on your mind. How are you feeling today?</p>
                         </div>
                     </div>
                 </div>
-                <div class="ritual-visual">
-                    <div class="circle-zen"></div>
+
+                <div class="chat-input-container">
+                    <textarea
+                        id="chatInput"
+                        placeholder="Share what's on your mind..."
+                        rows="3"
+                        onkeydown="handleChatKeyPress(event)"
+                    ></textarea>
+                    <button class="btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+
+                <div class="quick-responses">
+                    <p class="quick-responses-label">Need help getting started?</p>
+                    <button class="quick-response-btn" onclick="quickResponse('I\'m feeling anxious')">I'm feeling anxious</button>
+                    <button class="quick-response-btn" onclick="quickResponse('I\'m feeling sad')">I'm feeling sad</button>
+                    <button class="quick-response-btn" onclick="quickResponse('I need coping strategies')">I need coping strategies</button>
+                    <button class="quick-response-btn" onclick="quickResponse('Tell me about mindfulness')">Tell me about mindfulness</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <blockquote class="zen-quote">
-            <p>"Tea is not just a drink,</p>
-            <p>but a meditation in motion,</p>
-            <p>a poem written in steam."</p>
-        </blockquote>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="footer">
+    <!-- Journal Section -->
+    <section id="journal" class="section">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>禅茶 Zen Leaf</h3>
-                    <p>Cultivating moments of peace,<br>one cup at a time</p>
+            <div class="journal-container">
+                <div class="journal-header">
+                    <h2>Your Personal Journal</h2>
+                    <button class="btn-primary" onclick="showNewEntryModal()">New Entry</button>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Explore</h4>
-                        <ul>
-                            <li><a href="#collection">Tea Collection</a></li>
-                            <li><a href="#philosophy">Our Story</a></li>
-                            <li><a href="#ritual">Brewing Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#">Newsletter</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
+
+                <div class="journal-prompts">
+                    <h3>Journal Prompts</h3>
+                    <div class="prompts-grid">
+                        <div class="prompt-card" onclick="usePrompt('What am I grateful for today?')">
+                            What am I grateful for today?
+                        </div>
+                        <div class="prompt-card" onclick="usePrompt('What emotions did I experience today?')">
+                            What emotions did I experience today?
+                        </div>
+                        <div class="prompt-card" onclick="usePrompt('What challenge did I overcome?')">
+                            What challenge did I overcome?
+                        </div>
+                        <div class="prompt-card" onclick="usePrompt('What do I need to let go of?')">
+                            What do I need to let go of?
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Zen Leaf. All rights reserved. Crafted with mindfulness.</p>
+
+                <div class="journal-entries" id="journalEntries">
+                    <p class="empty-state">No journal entries yet. Start writing to track your journey.</p>
+                </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Mood Tracker Section -->
+    <section id="mood" class="section">
+        <div class="container">
+            <div class="mood-container">
+                <h2>How are you feeling today?</h2>
+
+                <div class="mood-selector">
+                    <button class="mood-btn" data-mood="great" onclick="logMood('great', '😊')">
+                        <span class="mood-emoji">😊</span>
+                        <span class="mood-label">Great</span>
+                    </button>
+                    <button class="mood-btn" data-mood="good" onclick="logMood('good', '🙂')">
+                        <span class="mood-emoji">🙂</span>
+                        <span class="mood-label">Good</span>
+                    </button>
+                    <button class="mood-btn" data-mood="okay" onclick="logMood('okay', '😐')">
+                        <span class="mood-emoji">😐</span>
+                        <span class="mood-label">Okay</span>
+                    </button>
+                    <button class="mood-btn" data-mood="low" onclick="logMood('low', '😔')">
+                        <span class="mood-emoji">😔</span>
+                        <span class="mood-label">Low</span>
+                    </button>
+                    <button class="mood-btn" data-mood="struggling" onclick="logMood('struggling', '😢')">
+                        <span class="mood-emoji">😢</span>
+                        <span class="mood-label">Struggling</span>
+                    </button>
+                </div>
+
+                <div class="mood-history" id="moodHistory">
+                    <h3>Your Mood History</h3>
+                    <div id="moodList" class="mood-list">
+                        <p class="empty-state">Start tracking your mood to see patterns over time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+        <div class="container">
+            <h2>Resources & Support</h2>
+
+            <div class="crisis-resources">
+                <h3>Crisis Support (24/7)</h3>
+                <div class="resource-grid">
+                    <div class="resource-card crisis">
+                        <h4>988 Suicide & Crisis Lifeline</h4>
+                        <p>Call or text 988</p>
+                        <p class="resource-description">Free, confidential support for people in distress</p>
+                    </div>
+                    <div class="resource-card crisis">
+                        <h4>Crisis Text Line</h4>
+                        <p>Text "HELLO" to 741741</p>
+                        <p class="resource-description">24/7 text support for any crisis</p>
+                    </div>
+                    <div class="resource-card crisis">
+                        <h4>Emergency Services</h4>
+                        <p>Call 911</p>
+                        <p class="resource-description">For immediate life-threatening emergencies</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coping-strategies">
+                <h3>Coping Strategies</h3>
+                <div class="strategies-grid">
+                    <div class="strategy-card">
+                        <h4>Deep Breathing</h4>
+                        <p>Breathe in for 4 counts, hold for 4, exhale for 4, hold for 4. Repeat 4 times.</p>
+                        <button class="btn-secondary" onclick="startBreathingExercise()">Start Exercise</button>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>5-4-3-2-1 Grounding</h4>
+                        <p>Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Progressive Muscle Relaxation</h4>
+                        <p>Tense and release each muscle group, starting from your toes to your head.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Mindful Walking</h4>
+                        <p>Take a slow walk, focusing on each step and your breath. Notice your surroundings.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="professional-help">
+                <h3>Finding Professional Help</h3>
+                <div class="help-info">
+                    <p>While this AI companion can provide support, professional therapy offers personalized care for your specific needs. Consider reaching out to:</p>
+                    <ul>
+                        <li>Licensed therapists and counselors</li>
+                        <li>Psychiatrists for medication management</li>
+                        <li>Support groups for shared experiences</li>
+                        <li>Your primary care physician for referrals</li>
+                    </ul>
+                    <p>Many therapists offer sliding scale fees or accept insurance. Online therapy platforms like BetterHelp and Talkspace can also be accessible options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal Entry Modal -->
+    <div id="journalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Journal Entry</h3>
+                <button class="modal-close" onclick="closeJournalModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="journalTitle" placeholder="Title (optional)" class="journal-title-input">
+                <textarea id="journalContent" placeholder="Write your thoughts here..." rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeJournalModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveJournalEntry()">Save Entry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breathing Exercise Modal -->
+    <div id="breathingModal" class="modal">
+        <div class="modal-content breathing-modal">
+            <button class="modal-close" onclick="closeBreathingExercise()">×</button>
+            <div class="breathing-circle" id="breathingCircle">
+                <div class="breathing-text" id="breathingText">Breathe In</div>
+            </div>
+            <button class="btn-secondary" onclick="closeBreathingExercise()">End Exercise</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
