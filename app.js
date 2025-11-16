@@ -6,27 +6,27 @@ const stories = {
         title: 'The Magic Garden',
         pages: [
             {
-                illustration: '<8',
+                illustration: '🌸',
                 background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)',
-                text: 'Once upon a time, there was a <span class="interactive-element" data-sound="sparkle">magical garden <</span>',
+                text: 'Once upon a time, there was a <span class="interactive-element" data-sound="sparkle">magical garden 🌟</span>',
                 interactive: true
             },
             {
-                illustration: '>�',
+                illustration: '🦋',
                 background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)',
-                text: 'Beautiful <span class="interactive-element" data-sound="flutter">butterflies >�</span> danced in the sunshine!',
+                text: 'Beautiful <span class="interactive-element" data-sound="flutter">butterflies 🦋</span> danced in the sunshine!',
                 interactive: true
             },
             {
-                illustration: '<',
+                illustration: '🌈',
                 background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)',
-                text: 'A <span class="interactive-element" data-sound="rainbow">rainbow <</span> appeared over the flowers!',
+                text: 'A <span class="interactive-element" data-sound="rainbow">rainbow 🌈</span> appeared over the flowers!',
                 interactive: true
             },
             {
-                illustration: '<:',
+                illustration: '🌺',
                 background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)',
-                text: 'The flowers smiled and the garden was happy! The End =�',
+                text: 'The flowers smiled and the garden was happy! The End 💖',
                 interactive: false
             }
         ]
@@ -35,27 +35,27 @@ const stories = {
         title: 'Space Adventure',
         pages: [
             {
-                illustration: '=�',
+                illustration: '🚀',
                 background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)',
-                text: 'Blast off! <span class="interactive-element" data-sound="rocket">Rocket =�</span> zooms into space!',
+                text: 'Blast off! <span class="interactive-element" data-sound="rocket">Rocket 🚀</span> zooms into space!',
                 interactive: true
             },
             {
-                illustration: '<',
+                illustration: '🌟',
                 background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)',
-                text: 'Look at all the twinkling <span class="interactive-element" data-sound="twinkle">stars P</span>',
+                text: 'Look at all the twinkling <span class="interactive-element" data-sound="twinkle">stars ⭐</span>',
                 interactive: true
             },
             {
-                illustration: '=}',
+                illustration: '👽',
                 background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)',
-                text: 'We meet a friendly <span class="interactive-element" data-sound="hello">alien =}</span> who waves hello!',
+                text: 'We meet a friendly <span class="interactive-element" data-sound="hello">alien 👽</span> who waves hello!',
                 interactive: true
             },
             {
-                illustration: '<',
+                illustration: '🌍',
                 background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)',
-                text: 'Time to fly back home to Earth <! What an adventure!',
+                text: 'Time to fly back home to Earth 🌍! What an adventure!',
                 interactive: false
             }
         ]
@@ -64,29 +64,27 @@ const stories = {
         title: 'Ocean Friends',
         pages: [
             {
-                illustration: '= ',
+                illustration: '🐠',
                 background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)',
-                text: 'Deep in the blue ocean, a <span class="interactive-element" data-sound="bubble">colorful fish = </span> swims by!',
+                text: 'Deep in the blue ocean, a <span class="interactive-element" data-sound="bubble">colorful fish 🐠</span> swims by!',
                 interactive: true
             },
             {
-                illustration: '=',
+                illustration: '🐙',
                 background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)',
-                text: 'An <span class="interactive-element" data-sound="splash">octopus =</span> waves all eight arms!',
+                text: 'An <span class="interactive-element" data-sound="splash">octopus 🐙</span> waves all eight arms!',
                 interactive: true
             },
             {
-                illustration: '="',
+                illustration: '🐢',
                 background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
-                text: 'A wise old <span class="interactive-element" data-sound="calm">turtle ="</span> swims slowly past.',
+                text: 'A wise old <span class="interactive-element" data-sound="calm">turtle 🐢</span> swims slowly past.',
                 interactive: true
             },
             {
-                illustration: '<
-',
+                illustration: '🌊',
                 background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)',
-                text: 'All the ocean friends play together in the waves! <
- The End!',
+                text: 'All the ocean friends play together in the waves! 🌊 The End!',
                 interactive: false
             }
         ]
@@ -95,27 +93,27 @@ const stories = {
         title: 'Forest Friends',
         pages: [
             {
-                illustration: '>�',
+                illustration: '🦊',
                 background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)',
-                text: 'In the forest, a <span class="interactive-element" data-sound="fox">clever fox >�</span> explores!',
+                text: 'In the forest, a <span class="interactive-element" data-sound="fox">clever fox 🦊</span> explores!',
                 interactive: true
             },
             {
-                illustration: '=;',
+                illustration: '🐻',
                 background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)',
-                text: 'A big friendly <span class="interactive-element" data-sound="bear">bear =;</span> waves hello!',
+                text: 'A big friendly <span class="interactive-element" data-sound="bear">bear 🐻</span> waves hello!',
                 interactive: true
             },
             {
-                illustration: '>�',
+                illustration: '🦉',
                 background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)',
-                text: 'A wise <span class="interactive-element" data-sound="owl">owl >�</span> hoots from a tall tree!',
+                text: 'A wise <span class="interactive-element" data-sound="owl">owl 🦉</span> hoots from a tall tree!',
                 interactive: true
             },
             {
-                illustration: '<3',
+                illustration: '🌳',
                 background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)',
-                text: 'All the forest friends live happily among the trees! <3',
+                text: 'All the forest friends live happily among the trees! 🌳',
                 interactive: false
             }
         ]
@@ -124,27 +122,27 @@ const stories = {
         title: 'Rainbow Kingdom',
         pages: [
             {
-                illustration: '<',
+                illustration: '🌈',
                 background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)',
-                text: 'Welcome to the <span class="interactive-element" data-sound="rainbow">Rainbow Kingdom <</span>!',
+                text: 'Welcome to the <span class="interactive-element" data-sound="rainbow">Rainbow Kingdom 🌈</span>!',
                 interactive: true
             },
             {
-                illustration: '>�',
+                illustration: '🦄',
                 background: 'linear-gradient(135deg, #FFE66D 0%, #A78BFA 100%)',
-                text: 'A magical <span class="interactive-element" data-sound="magic">unicorn >�</span> gallops by!',
+                text: 'A magical <span class="interactive-element" data-sound="magic">unicorn 🦄</span> gallops by!',
                 interactive: true
             },
             {
-                illustration: '=Q',
+                illustration: '👑',
                 background: 'linear-gradient(135deg, #A78BFA 0%, #FF9F1C 100%)',
-                text: 'The rainbow <span class="interactive-element" data-sound="crown">crown =Q</span> sparkles!',
+                text: 'The rainbow <span class="interactive-element" data-sound="crown">crown 👑</span> sparkles!',
                 interactive: true
             },
             {
-                illustration: '(',
+                illustration: '✨',
                 background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE5F0 100%)',
-                text: 'Everything sparkles with rainbow magic! ( The End!',
+                text: 'Everything sparkles with rainbow magic! ✨ The End!',
                 interactive: false
             }
         ]
@@ -153,27 +151,27 @@ const stories = {
         title: 'Dinosaur Day',
         pages: [
             {
-                illustration: '>�',
+                illustration: '🦕',
                 background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)',
-                text: 'A friendly <span class="interactive-element" data-sound="dino">dinosaur >�</span> says hello!',
+                text: 'A friendly <span class="interactive-element" data-sound="dino">dinosaur 🦕</span> says hello!',
                 interactive: true
             },
             {
-                illustration: '>�',
+                illustration: '🦖',
                 background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)',
-                text: 'ROAR! Here comes a <span class="interactive-element" data-sound="roar">T-Rex >�</span>!',
+                text: 'ROAR! Here comes a <span class="interactive-element" data-sound="roar">T-Rex 🦖</span>!',
                 interactive: true
             },
             {
-                illustration: '>Z',
+                illustration: '🥚',
                 background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)',
-                text: 'Look! Baby dinos hatching from <span class="interactive-element" data-sound="crack">eggs >Z</span>!',
+                text: 'Look! Baby dinos hatching from <span class="interactive-element" data-sound="crack">eggs 🥚</span>!',
                 interactive: true
             },
             {
-                illustration: '<',
+                illustration: '🌋',
                 background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)',
-                text: 'The dinosaurs live happily by the volcano! < The End!',
+                text: 'The dinosaurs live happily by the volcano! 🌋 The End!',
                 interactive: false
             }
         ]
@@ -248,12 +246,11 @@ function toggleMusic() {
         // Note: Background music file may not exist, this is placeholder functionality
         // In production, you'd have actual music files
         musicPlaying = true;
-        musicIcon.textContent = '=';
+        musicIcon.textContent = '🔇';
         musicText.textContent = 'Music Off';
     } else {
         musicPlaying = false;
-        musicIcon.textContent = '=
-';
+        musicIcon.textContent = '🔊';
         musicText.textContent = 'Music On';
     }
 }
@@ -273,15 +270,15 @@ function openStory(storyId) {
         <div class="story-reader active" id="story-reader">
             <div class="story-content">
                 <div class="story-header">
-                    <button class="back-btn" onclick="closeStory()"> Back</button>
+                    <button class="back-btn" onclick="closeStory()">⬅ Back</button>
                     <h2 style="color: #333; font-size: clamp(1.5rem, 4vw, 2.5rem);">${currentStory.title}</h2>
                 </div>
                 <div class="story-page" id="story-page">
                     <!-- Page content will be inserted here -->
                 </div>
                 <div class="page-nav">
-                    <button class="nav-btn" id="prev-btn" onclick="previousPage()"> Previous</button>
-                    <button class="nav-btn" id="next-btn" onclick="nextPage()">Next �</button>
+                    <button class="nav-btn" id="prev-btn" onclick="previousPage()">⬅ Previous</button>
+                    <button class="nav-btn" id="next-btn" onclick="nextPage()">Next ➡</button>
                 </div>
             </div>
         </div>
@@ -352,10 +349,10 @@ function showPage(pageIndex) {
     nextBtn.disabled = pageIndex === currentStory.pages.length - 1;
 
     if (pageIndex === currentStory.pages.length - 1) {
-        nextBtn.textContent = '<� Home';
+        nextBtn.textContent = '🏠 Home';
         nextBtn.onclick = closeStory;
     } else {
-        nextBtn.textContent = 'Next �';
+        nextBtn.textContent = 'Next ➡';
         nextBtn.onclick = nextPage;
     }
 
@@ -382,7 +379,7 @@ function previousPage() {
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Kids Story App Loaded! <�');
+    console.log('Kids Story App Loaded! 🎉');
 
     // Add subtle background animations to story cards
     const storyCards = document.querySelectorAll('.story-card');
