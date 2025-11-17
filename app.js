@@ -1,338 +1,592 @@
-// Kids Story App - Interactive Stories with Animations
+// Kids Story App - Enriched Stories with Deep Plots (60-70 pages each)
 
-// Story database with multiple themed stories (50 pages each)
 const stories = {
     'magic-garden': {
         title: 'The Magic Garden',
         pages: [
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Once there was a little girl named <span class="interactive-element" data-sound="sparkle">Lily 👧</span>', interactive: true },
-            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She lived in a small <span class="interactive-element" data-sound="calm">house 🏡</span> with a big backyard.', interactive: true },
-            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'One day, she found a tiny <span class="interactive-element" data-sound="flutter">seed 🌱</span> sparkling in the grass!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The seed glowed with <span class="interactive-element" data-sound="sparkle">magic ✨</span>!', interactive: true },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Lily planted the seed in her garden.', interactive: false },
-            { illustration: '💧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She gave it <span class="interactive-element" data-sound="bubble">water 💧</span> every day.', interactive: true },
-            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The warm <span class="interactive-element" data-sound="twinkle">sun ☀️</span> shone down on it.', interactive: true },
-            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Soon, a little sprout appeared!', interactive: false },
-            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The sprout grew bigger and bigger!', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Then one morning, a beautiful <span class="interactive-element" data-sound="sparkle">flower 🌸</span> bloomed!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But this was no ordinary flower - it was magical!', interactive: false },
-            { illustration: '🌺', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'More <span class="interactive-element" data-sound="rainbow">flowers 🌺</span> started to grow all around!', interactive: true },
-            { illustration: '🌻', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'There were <span class="interactive-element" data-sound="twinkle">sunflowers 🌻</span>!', interactive: true },
-            { illustration: '🌷', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And pretty <span class="interactive-element" data-sound="flutter">tulips 🌷</span>!', interactive: true },
-            { illustration: '🌹', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'And sweet-smelling <span class="interactive-element" data-sound="sparkle">roses 🌹</span>!', interactive: true },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The flowers attracted beautiful <span class="interactive-element" data-sound="flutter">butterflies 🦋</span>!', interactive: true },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Purple butterflies danced in the air!', interactive: false },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Yellow butterflies twirled and swirled!', interactive: false },
-            { illustration: '🐝', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Busy <span class="interactive-element" data-sound="flutter">bees 🐝</span> came to visit!', interactive: true },
-            { illustration: '🐞', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Little <span class="interactive-element" data-sound="calm">ladybugs 🐞</span> crawled on the leaves!', interactive: true },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Then something amazing happened! A <span class="interactive-element" data-sound="rainbow">rainbow 🌈</span> appeared!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The rainbow touched the garden with magic!', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The flowers began to sing!', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"La la la!" sang the flowers. <span class="interactive-element" data-sound="twinkle">🎵</span>', interactive: true },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily was so happy! She danced with joy!', interactive: false },
-            { illustration: '🧚', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Suddenly, a tiny <span class="interactive-element" data-sound="magic">fairy 🧚</span> appeared!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"Hello, Lily!" said the fairy. "Thank you for caring for the magic garden!"', interactive: false },
-            { illustration: '🧚', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'The fairy waved her wand!', interactive: false },
-            { illustration: '⭐', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '<span class="interactive-element" data-sound="sparkle">Stars ⭐</span> sparkled everywhere!', interactive: true },
-            { illustration: '🌟', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The garden glowed brighter and brighter!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'A gentle <span class="interactive-element" data-sound="magic">unicorn 🦄</span> walked into the garden!', interactive: true },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'The unicorn had a shimmering horn!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Its mane was rainbow colored!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"You may ride on my back," said the unicorn.', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Lily climbed onto the unicorn!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They flew through the magical garden!', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They flew over the singing flowers!', interactive: false },
-            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They flew past the talking <span class="interactive-element" data-sound="calm">trees 🌳</span>!', interactive: true },
-            { illustration: '☁️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'They flew up to the soft <span class="interactive-element" data-sound="flutter">clouds ☁️</span>!', interactive: true },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'They slid down the rainbow!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily laughed and laughed!', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'When they landed, the fairy was waiting.', interactive: false },
-            { illustration: '🧚', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"This garden will always be magical," said the fairy.', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"As long as you care for it with love!"', interactive: false },
-            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily promised to always take care of her garden!', interactive: false },
-            { illustration: '🌺', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Every day she watered the flowers.', interactive: false },
-            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'And every day the garden grew more beautiful!', interactive: false },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The butterflies visited every morning!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'And the rainbow always shone above!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily and her magic garden lived happily! The End! 💖', interactive: false }
+            // BEGINNING - Introduction (Pages 1-10)
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'In a cozy yellow house at the end of Maple Street, lived a little girl named <span class="interactive-element" data-sound="sparkle">Lily 👧</span>', interactive: true },
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Lily had curly brown hair and a smile that could light up any room.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But lately, Lily felt a little lonely. All her friends were busy, and summer felt extra long.', interactive: false },
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Her house had a big backyard that her grandmother used to tend.', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'But now it was just wild grass and weeds. Grandma had moved away, and nobody took care of it anymore.', interactive: false },
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Lily missed her grandma. She missed the beautiful flowers that used to grow there.', interactive: false },
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One hot summer morning, Lily wandered into the forgotten backyard.', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'As she walked through the tall grass, something caught her eye - a tiny glowing <span class="interactive-element" data-sound="sparkle">seed 🌱</span>!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The seed sparkled like a little star in the morning sun. It seemed to hum softly.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Lily picked it up carefully. "I wonder what you are?" she whispered.', interactive: false },
+
+            // INCITING INCIDENT (Pages 11-15)
+            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She remembered her grandma\'s old gardening book in the attic.', interactive: false },
+            { illustration: '🏠', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily rushed inside and climbed up to the dusty attic.', interactive: false },
+            { illustration: '📚', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'There it was - "Grandma Rose\'s Garden Guide" with pressed flowers on every page.', interactive: false },
+            { illustration: '📖', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'She opened it, and a note fell out: "Dear Lily, when you\'re ready, the garden will show you its magic."', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The glowing seed pulsed brighter as Lily held it near the book. This was no ordinary seed!', interactive: false },
+
+            // BEGINNING THE JOURNEY (Pages 16-25)
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Following the book\'s instructions, Lily found the sunniest spot in the yard.', interactive: false },
+            { illustration: '⛏️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'She dug a small hole. The dirt felt warm and alive under her fingers.', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Gently, she placed the glowing seed in the earth and covered it with soft soil.', interactive: false },
+            { illustration: '💧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She gave it <span class="interactive-element" data-sound="bubble">water 💧</span> from her grandma\'s old watering can.', interactive: true },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'That night, Lily could barely sleep. She kept thinking about the magic seed.', interactive: false },
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The next morning, she raced outside at sunrise.', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Her eyes went wide - a tiny green sprout had already pushed through!', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"You grew overnight!" Lily gasped with joy.', interactive: false },
+            { illustration: '💧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Every morning, Lily watered her plant and talked to it.', interactive: false },
+            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She read to it from her grandma\'s book. She told it about her day.', interactive: false },
+
+            // GROWTH AND CHALLENGES (Pages 26-40)
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Day by day, the sprout grew taller and stronger.', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Its leaves shimmered with a soft, magical glow.', interactive: false },
+            { illustration: '⛅', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'But one day, dark clouds rolled in. A big storm was coming!', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Lily worried. "My little plant is still so small. What if the storm hurts it?"', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She remembered what Grandma always said: "Plants are stronger than they look."', interactive: false },
+            { illustration: '🌧️', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'The storm came with thunder and rain. Lily watched from her window, worried.', interactive: false },
+            { illustration: '⚡', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Lightning flashed! Thunder boomed! The rain poured down!', interactive: false },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Finally, the storm passed. Lily went to bed, hoping her plant was okay.', interactive: false },
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'In the morning, sunshine filled her room.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily rushed outside and gasped with amazement!', interactive: false },
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Her plant had grown three feet tall! A beautiful <span class="interactive-element" data-sound="sparkle">flower bud 🌸</span> sat at the top!', interactive: true },
+            { illustration: '💪', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"You made it through the storm! You\'re so strong!" Lily cheered.', interactive: false },
+            { illustration: '🌺', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The rainwater had helped it grow even faster. Nature was amazing!', interactive: false },
+            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Lily opened her grandma\'s book to learn what to do next.', interactive: false },
+            { illustration: '🌞', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The book said: "Magic flowers need sunlight, water, and one special ingredient..."', interactive: false },
+
+            // THE MAGIC UNFOLDS (Pages 41-55)
+            { illustration: '❤️', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"...Love. Talk to your garden. Sing to it. Share your happiness."', interactive: false },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'So Lily sang to her flower every day. She sang her favorite songs.', interactive: false },
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The flower bud grew bigger and bigger, glowing brighter each day.', interactive: false },
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One magical sunrise, something incredible happened.', interactive: false },
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The flower <span class="interactive-element" data-sound="sparkle">bloomed ✨</span>! Petals unfolded like a rainbow!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'It wasn\'t just any flower - it was the most beautiful thing Lily had ever seen!', interactive: false },
+            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'The petals shimmered with all the colors of the <span class="interactive-element" data-sound="rainbow">rainbow 🌈</span>!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But then, the magic truly began.', interactive: false },
+            { illustration: '🌺', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Tiny seeds floated from the magic flower, glowing softly.', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They drifted through the air and landed all around the yard.', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Everywhere they touched the ground, new flowers instantly sprouted!', interactive: false },
+            { illustration: '🌻', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Golden <span class="interactive-element" data-sound="twinkle">sunflowers 🌻</span> tall as Lily!', interactive: true },
+            { illustration: '🌷', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Pink <span class="interactive-element" data-sound="flutter">tulips 🌷</span> swaying gently!', interactive: true },
+            { illustration: '🌹', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Red <span class="interactive-element" data-sound="sparkle">roses 🌹</span> with the sweetest smell!', interactive: true },
+            { illustration: '💐', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'In minutes, the whole yard transformed into a magical garden!', interactive: false },
+
+            // SHARING THE MAGIC (Pages 56-70)
+            { illustration: '🦋', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Beautiful <span class="interactive-element" data-sound="flutter">butterflies 🦋</span> appeared, dancing between the flowers!', interactive: true },
+            { illustration: '🐝', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Happy <span class="interactive-element" data-sound="flutter">bees 🐝</span> buzzed from blossom to blossom!', interactive: true },
+            { illustration: '🐞', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Friendly <span class="interactive-element" data-sound="calm">ladybugs 🐞</span> crawled on the leaves!', interactive: true },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'And then, Lily heard it - the flowers were humming! They made soft, gentle music!', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Hello, Lily," the flowers seemed to whisper. "Thank you for caring for us."', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily\'s heart filled with joy. She had created something beautiful!', interactive: false },
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Her neighbors noticed the transformation. Word spread quickly!', interactive: false },
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Soon, her friends came to visit. "Lily! Your garden is amazing!"', interactive: false },
+            { illustration: '👦', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Children from all over the neighborhood came to see the magic garden.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily wasn\'t lonely anymore. Her garden had brought everyone together!', interactive: false },
+            { illustration: '🧚', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'One evening, a tiny <span class="interactive-element" data-sound="magic">fairy 🧚</span> appeared among the roses!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"I am Flora, guardian of magical gardens," the fairy said softly.', interactive: false },
+            { illustration: '🧚', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"You have proven yourself worthy, Lily. You showed patience, care, and love."', interactive: false },
+            { illustration: '⭐', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"This garden will stay magical as long as you continue to care for it."', interactive: false },
+            { illustration: '🦄', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Flora waved her wand, and a gentle <span class="interactive-element" data-sound="magic">unicorn 🦄</span> appeared!', interactive: true },
+            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'The unicorn had a mane of rainbow colors and kind, gentle eyes.', interactive: false },
+            { illustration: '🦄', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"This is Starlight," said Flora. "She will visit your garden when you need magic most."', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Lily gently petted Starlight\'s soft nose. The unicorn nuzzled her hand.', interactive: false },
+            { illustration: '📞', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'That night, Lily called her grandma on the phone.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Grandma! The magic seed you left me - it grew into the most amazing garden!"', interactive: false },
+            { illustration: '❤️', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Grandma laughed warmly. "I knew you would understand its magic, my dear."', interactive: false },
+            { illustration: '💕', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"The real magic wasn\'t the seed, Lily. It was your love and patience."', interactive: false },
+
+            // CONCLUSION (Pages 71-80)
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Every day after that, Lily tended her magic garden.', interactive: false },
+            { illustration: '💧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She watered every plant with care.', interactive: false },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She sang to the flowers every morning.', interactive: false },
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'She invited all her friends to play in the garden.', interactive: false },
+            { illustration: '📚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She taught them what Grandma\'s book had taught her.', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Soon, magic gardens began growing all over the neighborhood!', interactive: false },
+            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Every child learned that with patience and love, they could grow magic too.', interactive: false },
+            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Starlight the unicorn visited often, always when the children needed wonder most.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Lily learned that the best magic comes from caring for things with your whole heart.', interactive: false },
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And her magic garden bloomed brighter every single day. The End. 💖', interactive: false }
         ]
     },
+
     'space-adventure': {
-        title: 'Space Adventure',
+        title: 'Emma\'s Space Adventure',
         pages: [
-            { illustration: '👧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Meet <span class="interactive-element" data-sound="hello">Emma 👧</span>, a brave little astronaut!', interactive: true },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Emma had a shiny <span class="interactive-element" data-sound="rocket">rocket 🚀</span>!', interactive: true },
-            { illustration: '🌍', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'She lived on planet <span class="interactive-element" data-sound="calm">Earth 🌍</span>.', interactive: true },
-            { illustration: '🌟', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'But Emma dreamed of visiting the <span class="interactive-element" data-sound="twinkle">stars 🌟</span>!', interactive: true },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'One day, Emma got into her rocket.', interactive: false },
-            { illustration: '⭐', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: '"Today I will explore space!" she said.', interactive: false },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma buckled her seatbelt tight.', interactive: false },
-            { illustration: '⏰', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"10... 9... 8... 7... 6..."', interactive: false },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"5... 4... 3... 2... 1..."', interactive: false },
+            // BEGINNING - Introduction (Pages 1-10)
+            { illustration: '👧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '<span class="interactive-element" data-sound="hello">Emma 👧</span> loved looking at the stars every night.', interactive: true },
+            { illustration: '🌟', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'She would lie in her backyard and wonder: "What\'s out there?"', interactive: false },
+            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Emma read every book about space she could find at the library.', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'She lived in a small town where everyone knew each other on planet <span class="interactive-element" data-sound="calm">Earth 🌍</span>.', interactive: true },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But Emma dreamed of adventure. She dreamed of exploring the cosmos!', interactive: false },
+            { illustration: '🔭', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Her grandfather had given her a telescope for her birthday.', interactive: false },
+            { illustration: '⭐', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Through it, she\'d seen Mars, Jupiter, and countless stars.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"I wish I could visit them," Emma whispered to the night sky.', interactive: false },
+            { illustration: '🌠', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'That night, a shooting star streaked across the sky.', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma made a wish with all her heart: "I wish I could explore space!"', interactive: false },
+
+            // THE MYSTERIOUS GIFT (Pages 11-20)
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The next morning, Emma found something incredible in her backyard.', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%)', text: 'A small, shiny <span class="interactive-element" data-sound="rocket">rocket ship 🚀</span> sat there, gleaming in the sunlight!', interactive: true },
+            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'It was silver with blue stripes, just big enough for one person.', interactive: false },
+            { illustration: '✉️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'A note was attached: "For the brave explorer - Your adventure awaits!"', interactive: false },
+            { illustration: '❓', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma looked around. Who could have left this?', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'She approached the rocket carefully. A door slid open with a soft whoosh.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Inside was a perfect pilot\'s seat, with buttons and screens that glowed softly.', interactive: false },
+            { illustration: '📋', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'On the dashboard was a simple instruction manual: "Think of where you want to go."', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma\'s heart raced. Could this really take her to space?', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'She felt nervous. Space was so big, so unknown. What if she got lost?', interactive: false },
+
+            // OVERCOMING FEAR (Pages 21-30)
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But Emma remembered what her grandfather always said: "Brave doesn\'t mean not scared."', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"Brave means doing it anyway!" Emma said out loud.', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'She climbed into the rocket and sat in the pilot\'s seat.', interactive: false },
+            { illustration: '💺', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The seatbelt clicked around her. The screens lit up with friendly colors.', interactive: false },
+            { illustration: '🌟', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Emma closed her eyes and thought: "Take me to the stars!"', interactive: false },
+            { illustration: '⏰', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The rocket hummed to life. "Countdown initiated: 10... 9... 8..."', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"7... 6... 5... 4..."', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma took a deep breath. "3... 2... 1..."', interactive: false },
             { illustration: '🚀', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '<span class="interactive-element" data-sound="rocket">BLAST OFF! 🚀</span>', interactive: true },
-            { illustration: '☁️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The rocket flew through the clouds!', interactive: false },
-            { illustration: '🌤️', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Higher and higher it went!', interactive: false },
-            { illustration: '🌍', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Emma looked down at Earth getting smaller.', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Soon she was in space!', interactive: false },
-            { illustration: '⭐', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Stars twinkled all around her!', interactive: false },
-            { illustration: '🌟', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"Wow!" said Emma. "Space is beautiful!"', interactive: false },
-            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Emma flew past the <span class="interactive-element" data-sound="twinkle">moon 🌙</span>!', interactive: true },
-            { illustration: '🌙', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The moon was round and bright!', interactive: false },
-            { illustration: '👋', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Emma waved hello to the moon!', interactive: false },
-            { illustration: '💫', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Then she saw shooting <span class="interactive-element" data-sound="sparkle">stars 💫</span>!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'They zoomed past her rocket!', interactive: false },
-            { illustration: '🪐', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma spotted a beautiful <span class="interactive-element" data-sound="rainbow">planet 🪐</span> with rings!', interactive: true },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'She flew closer to see it better!', interactive: false },
-            { illustration: '🪐', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'The planet was purple and sparkly!', interactive: false },
-            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Suddenly, a friendly <span class="interactive-element" data-sound="hello">alien 👽</span> appeared!', interactive: true },
-            { illustration: '👽', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'The alien had three eyes and was green!', interactive: false },
-            { illustration: '👋', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"Hello!" said the alien. "I am Zorp!"', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: '"Hello Zorp! I am Emma!" she replied.', interactive: false },
-            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"Would you like to visit my planet?" asked Zorp.', interactive: false },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"Yes please!" said Emma excitedly!', interactive: false },
-            { illustration: '🪐', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'They landed on the purple planet!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'Everything on the planet sparkled!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'There were rainbow-colored <span class="interactive-element" data-sound="rainbow">trees 🌈</span>!', interactive: true },
-            { illustration: '🎈', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'And floating <span class="interactive-element" data-sound="flutter">bubbles 🎈</span>!', interactive: true },
-            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Zorp introduced Emma to his alien friends!', interactive: false },
-            { illustration: '👽', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'There was Beep, who had four arms!', interactive: false },
-            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'And Bloop, who could change colors!', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The aliens sang Emma a space <span class="interactive-element" data-sound="twinkle">song 🎵</span>!', interactive: true },
-            { illustration: '💃', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'They all danced together in zero gravity!', interactive: false },
-            { illustration: '🍪', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Zorp shared space cookies with Emma!', interactive: false },
-            { illustration: '⭐', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The cookies were shaped like stars and tasted like honey!', interactive: false },
-            { illustration: '⏰', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'After a while, Emma checked the time.', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"I should go home now," said Emma.', interactive: false },
-            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"Come back soon!" said all the aliens.', interactive: false },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma got back in her rocket.', interactive: false },
-            { illustration: '👋', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'She waved goodbye to her new friends!', interactive: false },
-            { illustration: '🚀', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The rocket zoomed back through space!', interactive: false },
-            { illustration: '🌍', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Soon Emma could see <span class="interactive-element" data-sound="calm">Earth 🌍</span> again!', interactive: true },
-            { illustration: '🏠', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She landed safely back home!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Emma smiled, thinking about her space adventure! The End! 🚀', interactive: false }
+            { illustration: '☁️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The rocket shot upward! Emma watched her house get smaller and smaller!', interactive: false },
+
+            // JOURNEY BEGINS (Pages 31-45)
+            { illustration: '🌤️', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'They zoomed through fluffy white clouds!', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Soon Earth became a beautiful blue marble below.', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"Wow," Emma breathed. "Earth is so beautiful from up here!"', interactive: false },
+            { illustration: '⭐', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Stars appeared all around her - millions and millions of them!', interactive: false },
+            { illustration: '🌟', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'They weren\'t just tiny dots anymore. They were brilliant, shining suns!', interactive: false },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'The rocket floated past the <span class="interactive-element" data-sound="twinkle">moon 🌙</span>!', interactive: true },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Emma could see its craters and mountains up close!', interactive: false },
+            { illustration: '👋', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'She waved at the moon. "Hello, moon! You\'re amazing!"', interactive: false },
+            { illustration: '📡', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Suddenly, the rocket\'s communicator beeped. A message was coming in!', interactive: false },
+            { illustration: '📻', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'A friendly voice said: "Hello, Earth traveler! Welcome to space!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"H-Hello?" Emma said nervously. "Who are you?"', interactive: false },
+            { illustration: '📻', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"I am Zorp! Would you like to visit my planet? We love visitors!"', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma felt excited and nervous. Meeting aliens? A real alien planet?', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"Yes, please!" she said. "I\'d love to visit!"', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: '"Follow my signal!" Zorp said cheerfully. The rocket adjusted course.', interactive: false },
+
+            // MEETING ZORP (Pages 46-60)
+            { illustration: '💫', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma flew past shooting <span class="interactive-element" data-sound="sparkle">stars 💫</span>!', interactive: true },
+            { illustration: '🪐', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'She saw a beautiful planet with purple rings ahead!', interactive: false },
+            { illustration: '🪐', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The <span class="interactive-element" data-sound="rainbow">planet 🪐</span> sparkled like a giant gem in space!', interactive: true },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'The rocket gently landed on a soft, purple surface.', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'Emma stepped out. The ground felt bouncy, like walking on a cloud!', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'A friendly <span class="interactive-element" data-sound="hello">alien 👽</span> bounced toward her!', interactive: true },
+            { illustration: '👽', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'Zorp was green with three friendly eyes and a huge smile!', interactive: false },
+            { illustration: '👋', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"Welcome to Planet Zephyr!" Zorp said, waving all four arms!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"Hi! I\'m Emma!" she said, a bit shy but excited.', interactive: false },
+            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Zorp showed her around. The planet had rainbow-colored trees!', interactive: false },
+            { illustration: '💧', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'Rivers of purple water flowed upward instead of down!', interactive: false },
+            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Flowers that sang gentle melodies grew everywhere!', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: '"Come meet my friends!" Zorp said enthusiastically.', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'Beep bounced over - a small purple alien with four arms!', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Then came Bloop, who could change colors like a rainbow!', interactive: false },
+
+            // CULTURAL EXCHANGE (Pages 61-75)
+            { illustration: '😊', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'The aliens were curious about Emma. "What\'s Earth like?" they asked.', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Emma told them about oceans, mountains, and forests.', interactive: false },
+            { illustration: '🐕', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'She told them about dogs and cats and all Earth\'s animals.', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The aliens listened with wonder. "Your planet sounds amazing!"', interactive: false },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Zorp said, "Let us share our culture too! We love to <span class="interactive-element" data-sound="twinkle">sing 🎵</span>!"', interactive: true },
+            { illustration: '🎶', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'The aliens sang a beautiful space song in harmony!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Emma clapped along, laughing with joy!', interactive: false },
+            { illustration: '💃', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'They taught her a space dance - bouncing and spinning in low gravity!', interactive: false },
+            { illustration: '🍪', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Zorp brought out space cookies shaped like stars!', interactive: false },
+            { illustration: '⭐', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'They tasted like honey and cinnamon and sunshine all at once!', interactive: false },
+            { illustration: '🎨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Beep showed Emma how to paint with floating, glowing colors!', interactive: false },
+            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Together they created beautiful art that floated in the air!', interactive: false },
+            { illustration: '📚', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Bloop shared stories of space exploration and distant galaxies.', interactive: false },
+            { illustration: '⏰', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Hours passed like minutes. Emma was having the best time!', interactive: false },
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'But then she noticed Planet Zephyr\'s three suns starting to set.', interactive: false },
+
+            // THE HARD GOODBYE (Pages 76-85)
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Emma\'s rocket beeped. "Time to return home," it said gently.', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma\'s eyes filled with tears. She didn\'t want to leave her new friends!', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'Zorp saw her sadness. "Don\'t be sad, Emma. You can visit anytime!"', interactive: false },
+            { illustration: '💝', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Beep gave Emma a gift - a small, glowing crystal.', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: '"This crystal will let your rocket find us whenever you wish to visit!"', interactive: false },
+            { illustration: '🎁', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Bloop gave her a book of space stories written in universal language.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Real friends stay connected across any distance," Zorp said wisely.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma smiled through her tears. "I\'ll come back soon! I promise!"', interactive: false },
+            { illustration: '👋', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'All the aliens gathered to wave goodbye!', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'Emma climbed back into her rocket, holding the crystal tight.', interactive: false },
+
+            // JOURNEY HOME (Pages 86-95)
+            { illustration: '🚀', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'The rocket lifted off gently. Emma looked back at her new friends.', interactive: false },
+            { illustration: '👋', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'They were all waving with all their arms! She waved back.', interactive: false },
+            { illustration: '🌟', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'As the rocket flew through space, Emma thought about everything she\'d learned.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She learned that being brave meant trying new things, even when you\'re scared.', interactive: false },
+            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'She learned that friends can be different from you in every way.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And that kindness is the same language everywhere in the universe.', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Soon, <span class="interactive-element" data-sound="calm">Earth 🌍</span> appeared ahead!', interactive: true },
+            { illustration: '🏠', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Her little town looked so cozy and familiar.', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'The rocket landed gently in her backyard, right where it had started.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Emma stepped out. The grass felt soft under her feet. She was home!', interactive: false },
+
+            // EPILOGUE (Pages 96-100)
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'That night, Emma looked up at the stars again.', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'But now she knew - they weren\'t just distant lights anymore.', interactive: false },
+            { illustration: '👽', background: 'linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)', text: 'One of those stars was where her friends lived!', interactive: false },
+            { illustration: '💎', background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)', text: 'She held the crystal. It glowed softly, pulsing like a heartbeat.', interactive: false },
+            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Emma started writing in her journal about her adventure.', interactive: false },
+            { illustration: '✍️', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'She would share these stories at school. Maybe inspire other kids to dream big!', interactive: false },
+            { illustration: '🚀', background: 'linear-gradient(135deg, #1E3A8A 0%, #4C1D95 100%)', text: 'The rocket sat in her yard, ready for the next adventure.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Emma knew she would visit Zorp and friends again very soon.', interactive: false },
+            { illustration: '🌟', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Because the universe was full of wonders, and she was brave enough to explore them.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And that was the best feeling in the whole galaxy. The End! 🚀', interactive: false }
         ]
     },
+
     'ocean-friends': {
         title: 'Ocean Friends',
         pages: [
-            { illustration: '👦', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Meet <span class="interactive-element" data-sound="hello">Sam 👦</span>, who loved the ocean!', interactive: true },
-            { illustration: '🏖️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One day, Sam went to the <span class="interactive-element" data-sound="calm">beach 🏖️</span>.', interactive: true },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'The <span class="interactive-element" data-sound="splash">waves 🌊</span> splashed gently.', interactive: true },
-            { illustration: '🐚', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Sam found a beautiful <span class="interactive-element" data-sound="sparkle">shell 🐚</span>!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The shell sparkled in the sunlight!', interactive: false },
-            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'When Sam held it to his ear...', interactive: false },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'He could hear the ocean singing!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'Suddenly, the shell glowed with magic!', interactive: false },
-            { illustration: '💫', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Whoosh! Sam could breathe underwater!', interactive: false },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'He dove into the ocean!', interactive: false },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Right away, a <span class="interactive-element" data-sound="bubble">fish 🐠</span> swam up to him!', interactive: true },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'The fish was orange and blue and very colorful!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Hello! I am Finn the Fish!" said the fish.', interactive: false },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: '"Would you like to meet my ocean friends?"', interactive: false },
-            { illustration: '👦', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Yes please!" said Sam excitedly!', interactive: false },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'Finn swam deeper into the ocean.', interactive: false },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)', text: 'Sam followed, swimming like a fish!', interactive: false },
-            { illustration: '🐙', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'They met <span class="interactive-element" data-sound="splash">Oliver the Octopus 🐙</span>!', interactive: true },
-            { illustration: '🐙', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Oliver had eight long arms!', interactive: false },
-            { illustration: '👋', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'He waved all eight arms at once!', interactive: false },
-            { illustration: '🎨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"I am an artist!" said Oliver proudly.', interactive: false },
-            { illustration: '🐙', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'Oliver showed Sam his underwater paintings!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'They were beautiful rainbow colors!', interactive: false },
-            { illustration: '🐢', background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)', text: 'Next they met <span class="interactive-element" data-sound="calm">Shelly the Turtle 🐢</span>!', interactive: true },
-            { illustration: '🐢', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Shelly was very old and very wise.', interactive: false },
-            { illustration: '📚', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"I have lived in the ocean for 100 years!" said Shelly.', interactive: false },
-            { illustration: '🐢', background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)', text: '"I know all the ocean stories!"', interactive: false },
-            { illustration: '📖', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Shelly told Sam about the ocean treasures.', interactive: false },
-            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'About secret caves filled with shells!', interactive: false },
-            { illustration: '💎', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'And hidden gems that sparkle!', interactive: false },
-            { illustration: '🐬', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'Suddenly, a <span class="interactive-element" data-sound="flutter">dolphin 🐬</span> jumped by!', interactive: true },
-            { illustration: '🐬', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Hi everyone! I am Dolly the Dolphin!"', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Dolly loved to sing and dance!', interactive: false },
-            { illustration: '🐬', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'She did flips and spins in the water!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Sam clapped and cheered!', interactive: false },
-            { illustration: '🦈', background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)', text: 'Then they saw a big shadow!', interactive: false },
-            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Sam was a little scared!', interactive: false },
-            { illustration: '🦈', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'But it was just Sammy the Shark!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Don\'t worry! I am a friendly shark!" said Sammy.', interactive: false },
-            { illustration: '🦈', background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)', text: '"I protect all the little fish!"', interactive: false },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'All the fish loved Sammy!', interactive: false },
-            { illustration: '🎉', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Let\'s have a party!" suggested Dolly.', interactive: false },
-            { illustration: '🎊', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'All the ocean friends agreed!', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'They sang underwater songs!', interactive: false },
-            { illustration: '💃', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They danced in the ocean currents!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'The ocean sparkled with joy!', interactive: false },
-            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Soon the sun began to set.', interactive: false },
-            { illustration: '🏠', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'It was time for Sam to go home.', interactive: false },
-            { illustration: '🐠', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: '"Come visit us again!" said all his ocean friends.', interactive: false },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Sam swam back to shore with wonderful memories! The End! 🌊', interactive: false }
+            // BEGINNING - Introduction (Pages 1-8)
+            { illustration: '👧', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Meet <span class="interactive-element" data-sound="hello">Maya 👧</span>, a curious girl who lived by the sea.', interactive: true },
+            { illustration: '🏖️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Every morning, Maya would walk along the sandy beach collecting shells.', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'The <span class="interactive-element" data-sound="splash">ocean 🌊</span> called to her with its gentle waves.', interactive: true },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'But Maya was a little afraid of going into the deep water.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"What if I can\'t swim well enough?" she worried. "What if I get lost?"', interactive: false },
+            { illustration: '👴', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Her grandpa was a fisherman who knew the ocean like an old friend.', interactive: false },
+            { illustration: '⛵', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"The ocean is full of wonders, Maya," he would say. "Don\'t be afraid."', interactive: false },
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One beautiful sunrise, something magical happened.', interactive: false },
+
+            // THE MYSTERIOUS MESSAGE (Pages 9-15)
+            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya found an unusual <span class="interactive-element" data-sound="sparkle">shell 🐚</span> - it glowed with soft rainbow colors!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'When she held it to her ear, she heard more than ocean sounds.', interactive: false },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She heard a gentle voice singing: "Come visit us beneath the waves..."', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya gasped! "Did that shell just... talk to me?"', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'She looked at the ocean. The waves seemed to sparkle invitingly.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Maya felt scared but also... excited! This was an adventure calling!', interactive: false },
+            { illustration: '👣', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'She took a deep breath and walked toward the water.', interactive: false },
+
+            // MEETING THE OCEAN FRIENDS (Pages 16-28)
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'As soon as her toes touched the water, something amazing happened!', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'A gentle bubble surrounded her - she could breathe underwater!', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Maya didn\'t feel scared anymore. The bubble felt safe and warm.', interactive: false },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'A colorful <span class="interactive-element" data-sound="bubble">fish 🐠</span> swam up to her!', interactive: true },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Hello! I\'m Finn! We\'ve been waiting for you!" the fish said cheerfully.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"You can... talk?" Maya asked in wonder.', interactive: false },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Of course! All sea creatures can talk. Humans just usually can\'t hear us!"', interactive: false },
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'A wise old <span class="interactive-element" data-sound="calm">turtle 🐢</span> floated by slowly.', interactive: true },
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"Welcome, young one. I am Shelly, and I\'ve lived in these waters for 100 years."', interactive: false },
+            { illustration: '🐙', background: 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)', text: 'An <span class="interactive-element" data-sound="bubble">octopus 🐙</span> waved all eight arms in greeting!', interactive: true },
+            { illustration: '🐙', background: 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)', text: '"I\'m Oliver! Would you like a tour of our underwater world?"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya\'s fear melted away. These creatures were so friendly!', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Yes, please! I\'d love to see your world!" Maya said excitedly.', interactive: false },
+
+            // EXPLORING THE OCEAN (Pages 29-42)
+            { illustration: '🐠', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Finn led the way, swimming in playful loops.', interactive: false },
+            { illustration: '🪸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'They passed beautiful <span class="interactive-element" data-sound="sparkle">coral reefs 🪸</span> in every color!', interactive: true },
+            { illustration: '🐡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Pufferfish puffed up to say hello, making Maya giggle!', interactive: false },
+            { illustration: '🦀', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'A friendly <span class="interactive-element" data-sound="crack">crab 🦀</span> scuttled along the ocean floor.', interactive: true },
+            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Giant shells opened and closed, revealing pearls inside!', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Schools of fish moved together like underwater dancers.', interactive: false },
+            { illustration: '🐬', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Suddenly, a <span class="interactive-element" data-sound="twinkle">dolphin 🐬</span> jumped nearby!', interactive: true },
+            { illustration: '🐬', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: '"Hi Maya! I\'m Splash! Want to race?" the dolphin asked playfully.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya laughed. "You\'ll definitely win! But let\'s try!"', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'They swam together, Maya\'s magical bubble helping her glide smoothly.', interactive: false },
+            { illustration: '🦈', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: 'A large shadow appeared. Maya felt nervous - was it a <span class="interactive-element" data-sound="calm">shark 🦈</span>?', interactive: true },
+            { illustration: '🦈', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'It WAS a shark! But he had the kindest eyes.', interactive: false },
+            { illustration: '🦈', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: '"Don\'t be frightened. I\'m Bruce, and I only eat fish - never friends!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya learned that not everything that seems scary actually is!', interactive: false },
+
+            // THE PROBLEM DISCOVERED (Pages 43-52)
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Shelly the turtle gathered everyone. "Maya, we need your help."', interactive: false },
+            { illustration: '🗑️', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Our ocean home is getting filled with trash from the land."', interactive: false },
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Maya saw plastic bags floating by like jellyfish. Some fish were tangled in nets.', interactive: false },
+            { illustration: '💔', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Her heart broke. "This is terrible! How can I help?"', interactive: false },
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Shelly said wisely, "You can tell the people on land about us."', interactive: false },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Finn added, "Help them understand that the ocean is our home."', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Maya thought hard. She wanted to help her new friends!', interactive: false },
+            { illustration: '💡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: '"I have an idea! I\'ll organize a beach cleanup with my friends!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"And I\'ll teach them about ocean life! About all of you!"', interactive: false },
+            { illustration: '🐙', background: 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)', text: 'Oliver the octopus clapped all his arms. "That\'s wonderful!"', interactive: false },
+
+            // LEARNING OCEAN WISDOM (Pages 53-63)
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Shelly taught Maya about the ocean ecosystem.', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Every creature here has an important job. We all depend on each other."', interactive: false },
+            { illustration: '🪸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Coral reefs are homes for thousands of species."', interactive: false },
+            { illustration: '🦀', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Crabs clean the ocean floor."', interactive: false },
+            { illustration: '🐋', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Whales help mix the ocean waters, bringing nutrients up from below."', interactive: false },
+            { illustration: '🦈', background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)', text: '"Even sharks keep the ocean healthy by maintaining balance."', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya listened carefully, memorizing everything.', interactive: false },
+            { illustration: '🐬', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Splash the dolphin showed her how dolphins work together as families.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"We take care of each other," Splash explained. "That\'s what makes us strong."', interactive: false },
+            { illustration: '🐙', background: 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)', text: 'Oliver demonstrated his amazing camouflage abilities!', interactive: false },
+            { illustration: '🎨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'He changed colors to match the coral, then the sand, then became purple with polka dots!', interactive: false },
+
+            // THE OCEAN CELEBRATION (Pages 64-72)
+            { illustration: '🎉', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'That evening, the ocean creatures threw a <span class="interactive-element" data-sound="sparkle">celebration 🎉</span> for Maya!', interactive: true },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Fish of every color swirled in beautiful patterns!', interactive: false },
+            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Whales <span class="interactive-element" data-sound="twinkle">sang 🎵</span> their haunting, beautiful songs!', interactive: true },
+            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Shells opened and closed in rhythm, making clicking music!', interactive: false },
+            { illustration: '💫', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Bioluminescent plankton lit up like underwater <span class="interactive-element" data-sound="sparkle">stars 💫</span>!', interactive: true },
+            { illustration: '🦑', background: 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)', text: 'A giant squid created glowing ink patterns in the water - underwater fireworks!', interactive: false },
+            { illustration: '🐢', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Shelly spoke: "Maya, you are now a Guardian of the Ocean."', interactive: false },
+            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They gave her the magic shell to keep. "It will always connect you to us."', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya hugged them all (which is tricky underwater!).', interactive: false },
+
+            // RETURNING HOME WITH PURPOSE (Pages 73-80)
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'As sunset approached, Maya knew it was time to go home.', interactive: false },
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"I\'ll miss you all so much!" she said, tears mixing with the sea.', interactive: false },
+            { illustration: '🐠', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"We\'ll see you again!" Finn promised. "The ocean is always here."', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'The bubble gently carried Maya back to shore.', interactive: false },
+            { illustration: '🏖️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'She stepped onto the warm sand, the shell safe in her hand.', interactive: false },
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Maya ran home with a mission in her heart!', interactive: false },
+            { illustration: '📱', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She called all her friends. "We need to organize a beach cleanup!"', interactive: false },
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'She told them about her ocean friends (though some didn\'t quite believe her).', interactive: false },
+            { illustration: '🗑️', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'That weekend, 50 kids came to clean the beach!', interactive: false },
+            { illustration: '♻️', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'They collected trash, learned about recycling, and protected the ocean.', interactive: false },
+
+            // EPILOGUE (Pages 81-85)
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Every morning after that, Maya visited the beach.', interactive: false },
+            { illustration: '🐚', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'She would hold the magic shell and hear her friends singing.', interactive: false },
+            { illustration: '🏫', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'At school, she started an Ocean Club to teach others.', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'She was no longer afraid of the ocean - she was its friend and protector.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And the ocean creatures were so happy to have a friend on land. The End! 🌊', interactive: false }
         ]
     },
+
     'forest-animals': {
         title: 'Forest Friends',
         pages: [
-            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Deep in the green <span class="interactive-element" data-sound="calm">forest 🌲</span>...', interactive: true },
-            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Where tall trees touched the sky...', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Lived <span class="interactive-element" data-sound="fox">Freddy the Fox 🦊</span>!', interactive: true },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Freddy had bright orange fur!', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'And a big bushy tail!', interactive: false },
-            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One sunny morning, Freddy woke up.', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Today I will explore the forest!" he said.', interactive: false },
-            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'He walked through the tall trees.', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'He smelled the pretty <span class="interactive-element" data-sound="flutter">flowers 🌸</span>.', interactive: true },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Butterflies flew past him!', interactive: false },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Suddenly, he heard a sound! "Help! Help!"', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Freddy ran to see who needed help!', interactive: false },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'It was <span class="interactive-element" data-sound="flutter">Sally the Squirrel 🐿️</span>!', interactive: true },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'She was stuck in a tree!', interactive: false },
-            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"I climbed too high!" cried Sally.', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Don\'t worry! I will help you!" said Freddy.', interactive: false },
-            { illustration: '🤔', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'But the tree was too tall for Freddy!', interactive: false },
-            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Freddy thought hard about what to do.', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"I know! I will ask my friend <span class="interactive-element" data-sound="bear">Barry the Bear 🐻</span>!"', interactive: true },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Freddy ran to find Barry!', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Barry was eating honey from a tree!', interactive: false },
-            { illustration: '🍯', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: '"Mmm, this honey is delicious!" said Barry.', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Barry! We need your help!" said Freddy.', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Of course! What happened?" asked Barry.', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Freddy explained about Sally!', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"I am tall and strong! I can help!" said Barry.', interactive: false },
-            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They ran back to the tall tree!', interactive: false },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Sally was still stuck!', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Barry stood on his back legs!', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'He reached up high!', interactive: false },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Sally climbed onto Barry\'s paw!', interactive: false },
-            { illustration: '🐻', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Gently, Barry lowered her down!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Hooray! I am safe!" cheered Sally!', interactive: false },
-            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Thank you so much!" said Sally.', interactive: false },
-            { illustration: '🦉', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Just then, <span class="interactive-element" data-sound="owl">Oliver the Owl 🦉</span> flew down!', interactive: true },
-            { illustration: '🦉', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"I saw everything from my tree!" said Oliver.', interactive: false },
-            { illustration: '🦉', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"You are all such good friends!"', interactive: false },
-            { illustration: '💡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: '"I have an idea!" said Oliver wisely.', interactive: false },
-            { illustration: '🦉', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"Let\'s have a friendship party!"', interactive: false },
-            { illustration: '🎉', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Yes!" everyone shouted happily!', interactive: false },
-            { illustration: '🐰', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'More forest friends came to join!', interactive: false },
-            { illustration: '🦌', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Danny the Deer brought berries!', interactive: false },
-            { illustration: '🦝', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Rosie the Raccoon brought acorns!', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'They all sang forest songs!', interactive: false },
-            { illustration: '💃', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They danced between the trees!', interactive: false },
-            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'As the moon rose high...', interactive: false },
-            { illustration: '⭐', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'And the stars came out...', interactive: false },
-            { illustration: '🦊', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Freddy smiled at all his friends.', interactive: false },
-            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Friends help friends!" said Freddy.', interactive: false },
-            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'And they all lived happily in the forest! The End! 🌲', interactive: false }
+            // BEGINNING - Introduction (Pages 1-8)
+            { illustration: '👦', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '<span class="interactive-element" data-sound="hello">Ben 👦</span> loved exploring, but he\'d never been deep into the forest.', interactive: true },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The tall <span class="interactive-element" data-sound="calm">trees 🌲</span> near his house seemed mysterious and a little scary.', interactive: true },
+            { illustration: '👨', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'His dad was a park ranger. "The forest is full of life," he\'d say.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'But Ben worried: "What if I get lost? What if I meet a dangerous animal?"', interactive: false },
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'He preferred staying in his backyard where everything felt safe.', interactive: false },
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One sunny Saturday, Ben\'s ball bounced away... right into the forest!', interactive: false },
+            { illustration: '⚽', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'It rolled deeper and deeper between the trees.', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Ben stood at the forest edge. Should he go in?', interactive: false },
+
+            // THE BRAVE DECISION (Pages 9-15)
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben took a deep breath. "I can do this. It\'s just a forest."', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'He stepped between the trees. The sunlight filtered through leaves.', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Everything smelled fresh - like pine and earth and adventure.', interactive: false },
+            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'A <span class="interactive-element" data-sound="flutter">squirrel 🐿️</span> chattered from a branch above!', interactive: true },
+            { illustration: '⚽', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ben followed the path his ball had made in the leaves.', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The trees grew thicker. The forest was quiet except for birds singing.', interactive: false },
+            { illustration: '❓', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Then Ben realized - he couldn\'t see his house anymore. Was he lost?', interactive: false },
+
+            // MEETING THE FOREST FRIENDS (Pages 16-30)
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Suddenly, a beautiful <span class="interactive-element" data-sound="fox">fox 🦊</span> appeared!', interactive: true },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'She had bright orange fur and intelligent eyes.', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben froze. But the fox just tilted her head curiously.', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Lost, are you?" the fox said. "I\'m Fern. Don\'t be frightened."', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ben blinked. "You... you can talk?"', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Fern laughed - a sound like wind chimes. "In the deep forest, magic is real."', interactive: false },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'A large <span class="interactive-element" data-sound="bear">bear 🐻</span> emerged from behind a tree!', interactive: true },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Ben\'s heart raced. A bear! His biggest fear!', interactive: false },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'But the bear smiled gently. "Hello, little one. I\'m Boris. Welcome!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben realized - this bear wasn\'t scary at all! He was kind!', interactive: false },
+            { illustration: '🦌', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'A graceful <span class="interactive-element" data-sound="calm">deer 🦌</span> stepped delicately through the ferns.', interactive: true },
+            { illustration: '🦌', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"I am Diana," she said softly. "We don\'t often have human visitors."', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'An <span class="interactive-element" data-sound="owl">owl 🦉</span> hooted from above. "Who? Who? A new friend!"', interactive: true },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"I\'m Oliver the Owl, wisest in the woods!" he said proudly.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben\'s fear melted away. These animals were wonderful!', interactive: false },
+
+            // LEARNING ABOUT THE FOREST (Pages 31-45)
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Looking for this?" Fern nudged Ben\'s ball with her nose.', interactive: false },
+            { illustration: '⚽', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"Yes! Thank you!" Ben was so relieved!', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Before you go," said Oliver, "would you like to learn about our forest?"', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ben thought about it. His parents might worry... but this was amazing!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Yes, please! But can you help me find my way home later?"', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Of course! We know every tree and trail," Fern promised.', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The animals showed Ben the ancient trees - some 200 years old!', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Diana explained how plants and animals depend on each other.', interactive: false },
+            { illustration: '🐝', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: '"<span class="interactive-element" data-sound="flutter">Bees 🐝</span> pollinate flowers. Flowers feed bees. It\'s teamwork!"', interactive: true },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Boris showed Ben berry bushes. "I eat berries and spread seeds. New bushes grow!"', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Fern demonstrated hunting - but only for food, never for sport.', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Oliver explained the food chain and why every creature matters.', interactive: false },
+            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Even fallen trees become homes for insects, which feed birds!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben was amazed. The forest was like a huge, living family!', interactive: false },
+            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Squirrels showed him their acorn storage - preparing for winter.', interactive: false },
+
+            // THE FOREST\'S PROBLEM (Pages 46-55)
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'But then the animals showed Ben something sad.', interactive: false },
+            { illustration: '🗑️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'In a clearing, someone had dumped garbage.', interactive: false },
+            { illustration: '💔', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Plastic bottles, cans, and trash littered the beautiful forest floor.', interactive: false },
+            { illustration: '🦌', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Diana said sadly, "Sometimes humans forget we live here too."', interactive: false },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Boris showed where a cub got cut on broken glass.', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Ben felt terrible. "I\'m so sorry! Not all humans are like this!"', interactive: false },
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"I want to help clean this up! Will you show me what else needs fixing?"', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Fern\'s eyes brightened. "You would do that for us?"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Of course! The forest is everyone\'s home. We should protect it!"', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Oliver hooted wisely, "This is why we showed ourselves to you, Ben."', interactive: false },
+
+            // WORKING TOGETHER (Pages 56-68)
+            { illustration: '🤝', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben and the animals worked together to clean the clearing.', interactive: false },
+            { illustration: '🗑️', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Ben collected trash while Boris dug a hole for burying what could decompose.', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Fern and Diana pushed larger items to help Ben carry them.', interactive: false },
+            { illustration: '🐿️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Squirrels found small pieces of litter in hard-to-reach places.', interactive: false },
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'It took hours, but together they made a difference!', interactive: false },
+            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The clearing looked beautiful again!', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Now," said Oliver, "let me teach you forest wisdom."', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Always leave nature better than you found it."', interactive: false },
+            { illustration: '🦌', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Take only memories, leave only footprints," Diana added.', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Respect all living things, big and small," taught Fern.', interactive: false },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Boris said, "And remember - what hurts one part of nature hurts all of it."', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben felt like he\'d learned more today than in months of school!', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'The animals gave Ben a special gift - an acorn.', interactive: false },
+
+            // THE MAGICAL ACORN (Pages 69-77)
+            { illustration: '🌰', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'But this wasn\'t any <span class="interactive-element" data-sound="sparkle">acorn 🌰</span> - it glowed softly!', interactive: true },
+            { illustration: '✨', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"This is a friendship acorn," explained Diana.', interactive: false },
+            { illustration: '🌰', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"Hold it when you enter the forest, and you\'ll always be able to talk to us!"', interactive: false },
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Or plant it and grow a tree that connects our worlds," added Boris.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben held the acorn carefully. "Thank you! This is the best gift ever!"', interactive: false },
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'The sun was starting to set. Time to go home!', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Fern led the way through the trees, taking a special path.', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"This is the shortest way. We\'ll have you home in minutes!"', interactive: false },
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Soon, Ben could see his house through the trees!', interactive: false },
+
+            // SAYING GOODBYE AND NEW BEGINNINGS (Pages 78-85)
+            { illustration: '👋', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'At the forest edge, Ben hugged each of his new friends.', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Come back soon!" said Fern, nuzzling his hand.', interactive: false },
+            { illustration: '🐻', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: '"You\'re always welcome here," Boris said warmly.', interactive: false },
+            { illustration: '🦌', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"You\'re one of us now - a Forest Friend," Diana smiled.', interactive: false },
+            { illustration: '🦉', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Oliver called from above: "Remember what you\'ve learned!"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ben ran home, ball in one hand, magic acorn in the other.', interactive: false },
+            { illustration: '👨', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'His dad was on the porch. "There you are! Were you in the forest?"', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Yes! And Dad, it\'s amazing! Can I tell you all about it?"', interactive: false },
+
+            // EPILOGUE (Pages 86-92)
+            { illustration: '🌱', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'That night, Ben and his dad planted the magic acorn in their yard.', interactive: false },
+            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Over time, it grew into a beautiful oak tree.', interactive: false },
+            { illustration: '🏫', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ben started a Nature Club at school.', interactive: false },
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'He taught his friends about protecting forests and wildlife.', interactive: false },
+            { illustration: '🌲', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Every weekend, Ben visited his forest friends.', interactive: false },
+            { illustration: '🦊', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'They had countless adventures together.', interactive: false },
+            { illustration: '💚', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'And Ben was never afraid of the forest again - it was home. The End! 🌲', interactive: false }
         ]
     },
-    'rainbow-kingdom': {
-        title: 'Rainbow Kingdom',
-        pages: [
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Meet Princess <span class="interactive-element" data-sound="sparkle">Rose 👸</span>!', interactive: true },
-            { illustration: '🏰', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'She lived in a beautiful <span class="interactive-element" data-sound="magic">castle 🏰</span>!', interactive: true },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'In the magical <span class="interactive-element" data-sound="rainbow">Rainbow Kingdom 🌈</span>!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Everything in the kingdom was colorful!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'The sky had seven rainbow colors!', interactive: false },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The flowers bloomed in every color!', interactive: false },
-            { illustration: '🦋', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Even the butterflies had rainbow wings!', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'One day, Princess Rose woke up early.', interactive: false },
-            { illustration: '😮', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Something was wrong!', interactive: false },
-            { illustration: '☁️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'The kingdom was grey!', interactive: false },
-            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'All the colors were gone!', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Oh no!" cried Princess Rose.', interactive: false },
-            { illustration: '🔍', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"I must find the missing colors!"', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'She put on her brave princess dress!', interactive: false },
-            { illustration: '🗺️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'She looked at her magic map!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'The map showed where the colors went!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Her friend <span class="interactive-element" data-sound="magic">Unity the Unicorn 🦄</span> came!', interactive: true },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: '"I will help you!" said Unity.', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Rose climbed onto Unity\'s back!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'They flew into the sky!', interactive: false },
-            { illustration: '☁️', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'First, they flew to the Cloud Mountains!', interactive: false },
-            { illustration: '⛰️', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'The mountains were tall and white!', interactive: false },
-            { illustration: '🔴', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'There, they found the color <span class="interactive-element" data-sound="sparkle">RED 🔴</span>!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Yay! We found red!" cheered Rose!', interactive: false },
-            { illustration: '🧡', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Next, they searched for <span class="interactive-element" data-sound="twinkle">ORANGE 🧡</span>!', interactive: true },
-            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'They found it at the Sunset Valley!', interactive: false },
-            { illustration: '💛', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Then they looked for <span class="interactive-element" data-sound="sparkle">YELLOW 💛</span>!', interactive: true },
-            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'It was hiding behind the Sun!', interactive: false },
-            { illustration: '💚', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Next was <span class="interactive-element" data-sound="calm">GREEN 💚</span>!', interactive: true },
-            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They found green in the Emerald Forest!', interactive: false },
-            { illustration: '💙', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Then they searched for <span class="interactive-element" data-sound="bubble">BLUE 💙</span>!', interactive: true },
-            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Blue was playing in the ocean!', interactive: false },
-            { illustration: '💜', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Next was <span class="interactive-element" data-sound="magic">PURPLE 💜</span>!', interactive: true },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Purple was in the Lavender Fields!', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"We almost have all the colors!" said Rose!', interactive: false },
-            { illustration: '🦄', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: '"Just one more to find!" said Unity!', interactive: false },
-            { illustration: '❤️', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The last color was <span class="interactive-element" data-sound="sparkle">PINK ❤️</span>!', interactive: true },
-            { illustration: '🌸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Where could pink be?', interactive: false },
-            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Princess Rose thought hard!', interactive: false },
-            { illustration: '👑', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Then she remembered her <span class="interactive-element" data-sound="crown">crown 👑</span>!', interactive: true },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Her crown was pink!', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Pink was with me all along!"', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'Now they had all seven colors!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Princess Rose held them high!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'The colors flew back to the kingdom!', interactive: false },
-            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Red, orange, yellow, green, blue, purple, and pink!', interactive: false },
-            { illustration: '🏰', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'The Rainbow Kingdom was colorful again!', interactive: false },
-            { illustration: '🎉', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Everyone celebrated!', interactive: false },
-            { illustration: '👸', background: 'linear-gradient(135deg, #F0E5FF 0%, #DCC8FF 100%)', text: 'Princess Rose saved the day!', interactive: false },
-            { illustration: '🌈', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFE66D 100%)', text: 'And the kingdom stayed colorful forever! The End! 🌈', interactive: false }
-        ]
-    },
+
     'dinosaur-day': {
         title: 'Dinosaur Day',
         pages: [
-            { illustration: '🌋', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'Long, long ago, near a big <span class="interactive-element" data-sound="roar">volcano 🌋</span>...', interactive: true },
-            { illustration: '🌴', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Where palm trees grew tall...', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'Lived <span class="interactive-element" data-sound="dino">Danny the Dinosaur 🦕</span>!', interactive: true },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Danny was a gentle, long-necked dinosaur!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'He loved to eat leaves from tall trees!', interactive: false },
-            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'One sunny morning, Danny woke up!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"Today is a special day!" he thought.', interactive: false },
-            { illustration: '🎂', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'It was his birthday!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: '"I wonder if my friends remembered?"', interactive: false },
-            { illustration: '🌴', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Danny walked through the jungle!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'He saw his friend <span class="interactive-element" data-sound="roar">Tina the T-Rex 🦖</span>!', interactive: true },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Tina had short arms but big teeth!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'But Tina was friendly!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Hi Danny!" roared Tina happily!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: '"Hi Tina! Do you know what day it is?"', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Hmm, let me think..." said Tina.', interactive: false },
-            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Tina pretended to think hard!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Is it... Tuesday?" she asked.', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Danny felt a little sad.', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: '"Never mind," he said quietly.', interactive: false },
-            { illustration: '🌴', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Danny walked on through the jungle.', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'He met Terry the Triceratops!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Terry had three big horns!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: '"Hi Terry! Do you know what day it is?"', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"Hmm... is it Leaf-Eating Day?" asked Terry.', interactive: false },
-            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Danny felt even sadder.', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: '"My friends forgot my birthday!" he thought.', interactive: false },
-            { illustration: '🌴', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Danny walked slowly home.', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'His long neck drooped down.', interactive: false },
-            { illustration: '🏔️', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'He walked past the big rocks.', interactive: false },
-            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'He walked past the tall trees.', interactive: false },
-            { illustration: '🏠', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Finally, he reached his cave home.', interactive: false },
-            { illustration: '😮', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'But wait! What was that sound?', interactive: false },
-            { illustration: '🎉', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '<span class="interactive-element" data-sound="sparkle">"SURPRISE! 🎉"</span>', interactive: true },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'All his friends were there!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: 'Tina the T-Rex!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Terry the Triceratops!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'And many more dinosaur friends!', interactive: false },
-            { illustration: '🎂', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They made a huge birthday cake!', interactive: false },
-            { illustration: '🥚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Made from <span class="interactive-element" data-sound="crack">special eggs 🥚</span>!', interactive: true },
-            { illustration: '🎈', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'There were colorful balloons!', interactive: false },
-            { illustration: '🎁', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'And presents wrapped in leaves!', interactive: false },
-            { illustration: '😊', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: '"You remembered!" cried Danny happily!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFB3D9 100%)', text: '"Of course!" laughed Tina!', interactive: false },
-            { illustration: '🦖', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: '"We were just pretending!" said Terry!', interactive: false },
-            { illustration: '🎵', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They all sang "Happy Birthday!"', interactive: false },
-            { illustration: '🎂', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Danny blew out his candles!', interactive: false },
-            { illustration: '🍰', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Everyone ate delicious cake!', interactive: false },
-            { illustration: '💃', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'They danced the dinosaur dance!', interactive: false },
-            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #A8D5A8 100%)', text: 'It was the best birthday ever! The End! 🦕', interactive: false }
+            // BEGINNING - Introduction (Pages 1-8)
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: '<span class="interactive-element" data-sound="hello">Ruby 👧</span> was dinosaur-obsessed!', interactive: true },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'She had dinosaur toys, books, posters - everything <span class="interactive-element" data-sound="dino">dinosaur 🦕</span>!', interactive: true },
+            { illustration: '📚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She knew all their names: Tyrannosaurus, Triceratops, Stegosaurus!', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'But Ruby had one big wish: "I wish I could meet a REAL dinosaur!"', interactive: false },
+            { illustration: '🏛️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Her class was going to the natural history museum tomorrow.', interactive: false },
+            { illustration: '🦴', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'They would see dinosaur fossils - bones from millions of years ago!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ruby could barely contain her excitement!', interactive: false },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'That night, she dreamed of dinosaurs.', interactive: false },
+
+            // THE MUSEUM VISIT (Pages 9-18)
+            { illustration: '🏛️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'The next day, Ruby\'s class arrived at the huge museum.', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'The dinosaur hall was ENORMOUS!', interactive: false },
+            { illustration: '🦴', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'Giant skeletons towered overhead!', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'A <span class="interactive-element" data-sound="roar">T-Rex 🦖</span> skeleton stood in the center, mouth open in a silent roar!', interactive: true },
+            { illustration: '👨', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'The museum guide explained: "These creatures lived 65 million years ago..."', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby wandered away from her group, fascinated by each display.', interactive: false },
+            { illustration: '🥚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'She found a special exhibit: "Dinosaur Eggs - Touch Replica!"', interactive: false },
+            { illustration: '🥚', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Ruby touched the egg-shaped stone. It felt warm and tingly!', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Suddenly, the egg <span class="interactive-element" data-sound="sparkle">glowed ✨</span>!', interactive: true },
+            { illustration: '💫', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'The room spun! Colors swirled! Ruby felt like she was falling through time!', interactive: false },
+
+            // ARRIVAL IN THE DINOSAUR ERA (Pages 19-28)
+            { illustration: '🌴', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'When Ruby opened her eyes, everything had changed!', interactive: false },
+            { illustration: '🌋', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'She stood in a prehistoric jungle! A volcano smoked in the distance!', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Giant ferns and plants she\'d never seen grew everywhere!', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Where am I?!" Ruby gasped. "When am I?!"', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Then she saw it - a REAL <span class="interactive-element" data-sound="dino">dinosaur 🦕</span>!', interactive: true },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'A gentle Brachiosaurus munched leaves from a tall tree!', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby stood frozen. A real dinosaur! Her dream come true!', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'The Brachiosaurus looked down at her gently.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Hello, little one," it said in a deep, kind voice. "I\'m Bella."', interactive: false },
+            { illustration: '😮', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby found her voice. "You can talk! And... I\'m in dinosaur times!"', interactive: false },
+
+            // MEETING THE DINOSAUR HERD (Pages 29-42)
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Bella nodded her long neck. "The magic egg brought you here."', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"Don\'t worry! Most of us are friendly!" Bella reassured her.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"Come meet my herd!"', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Ruby carefully followed the enormous dinosaur through the jungle.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'In a clearing, she met other long-necked dinosaurs.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'There was Arlo, a young Brachiosaurus who loved to play!', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'And Grandpa Gus, the oldest and wisest of the herd.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Then Ruby met Terry the <span class="interactive-element" data-sound="roar">Triceratops 🦖</span>!', interactive: true },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'He had three impressive horns and a huge frill.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"These horns look scary, but I only use them to protect my family!" Terry explained.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'A Stegosaurus named Spike waddled over.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"I like your enthusiasm!" Spike said, plates on his back gleaming in the sun.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Little Pteranodons flew overhead, calling out greetings!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ruby was surrounded by dinosaurs - and they were all so kind!', interactive: false },
+
+            // LEARNING ABOUT DINOSAUR LIFE (Pages 43-58)
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Bella showed Ruby how they lived millions of years ago.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"We herbivores eat plants all day. It takes a lot to fill us up!"', interactive: false },
+            { illustration: '🌳', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Ruby watched Bella strip leaves from the tallest trees.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Terry explained: "We dinosaurs take care of each other."', interactive: false },
+            { illustration: '🥚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: '"We protect our eggs and babies together."', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Grandpa Gus shared ancient wisdom: "Everything in nature is connected."', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"We eat plants. Carnivores eat us. When we die, we feed the earth. It\'s the circle of life."', interactive: false },
+            { illustration: '🌿', background: 'linear-gradient(135deg, #E8FFE0 0%, #C8E6C9 100%)', text: 'Arlo showed Ruby how to find the juiciest ferns!', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"We work as a team. The herd is our family!" Arlo said happily.', interactive: false },
+            { illustration: '🌊', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'They took Ruby to a big watering hole.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'All kinds of dinosaurs came to drink together peacefully!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"We all need water. So we share!" explained Spike.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Flying Pteranodons dove for fish in the water.', interactive: false },
+            { illustration: '🌅', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'As the sun set, Ruby watched dinosaurs of all sizes settling down for the night.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"This is the most amazing day of my life!" Ruby said.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Bella smiled. "You\'ve learned what makes us special - kindness and family."', interactive: false },
+
+            // THE DANGER ARRIVES (Pages 59-67)
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'That night, Ruby slept safely between Bella\'s huge feet.', interactive: false },
+            { illustration: '☀️', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'But the next morning, something was wrong.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF4444 0%, #CC0000 100%)', text: 'A fierce <span class="interactive-element" data-sound="roar">T-Rex 🦖</span> appeared - and this one wasn\'t friendly!', interactive: true },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Everyone scattered! The T-Rex was hunting!', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Bella quickly used her tail to sweep Ruby to safety!', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'Terry and the other Triceratops formed a protective circle!', interactive: false },
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'They were protecting the babies - and Ruby!', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF4444 0%, #CC0000 100%)', text: 'The T-Rex roared, but seeing the united herd, it decided to hunt elsewhere.', interactive: false },
+            { illustration: '😰', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby\'s heart pounded. That was scary! But her friends had protected her!', interactive: false },
+
+            // UNDERSTANDING PREDATORS (Pages 68-75)
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'When the danger passed, Grandpa Gus explained something important.', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: '"That T-Rex isn\'t evil, Ruby. He\'s just hungry. It\'s his nature."', interactive: false },
+            { illustration: '🌍', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"Carnivores are part of nature\'s balance too."', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby understood. "Like in the circle of life you told me about?"', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"Exactly! We don\'t hate them. We just stay safe from them."', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"And together, as a herd, we\'re strong!" added Terry proudly.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Ruby learned that cooperation and family bonds kept everyone safe.', interactive: false },
+            { illustration: '💖', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'It was a lesson she\'d never forget!', interactive: false },
+
+            // TIME TO GO HOME (Pages 76-85)
+            { illustration: '✨', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'That afternoon, the magic egg began to <span class="interactive-element" data-sound="sparkle">glow ✨</span> again.', interactive: true },
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: '"It\'s time for you to go home," Bella said sadly.', interactive: false },
+            { illustration: '😢', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'Ruby hugged Bella\'s huge leg. "I don\'t want to leave you!"', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: '"You must return to your own time. But you\'ll always remember us."', interactive: false },
+            { illustration: '🦖', background: 'linear-gradient(135deg, #FF9F1C 0%, #FFE66D 100%)', text: 'All the dinosaurs gathered to say goodbye.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'Arlo gave her a smooth stone. "To remember our adventure!"', interactive: false },
+            { illustration: '💕', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ruby held the stone tight as the magic swirled around her.', interactive: false },
+            { illustration: '👋', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: '"Goodbye, friends! I\'ll never forget you!" Ruby called out.', interactive: false },
+            { illustration: '✨', background: 'linear-gradient(135deg, #E0F7FF 0%, #7DD3FC 100%)', text: 'Colors spun! Time twisted! Ruby felt herself being pulled forward through millions of years!', interactive: false },
+            { illustration: '🏛️', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'Suddenly, she was back in the museum!', interactive: false },
+
+            // BACK IN THE PRESENT (Pages 86-95)
+            { illustration: '😮', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ruby looked around. Her class was still there - no time had passed at all!', interactive: false },
+            { illustration: '🥚', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'Her hand was still on the dinosaur egg replica.', interactive: false },
+            { illustration: '🪨', background: 'linear-gradient(135deg, #FFF0E0 0%, #FFDDB3 100%)', text: 'But in her other hand - Arlo\'s stone! It was real!', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Ruby smiled. It wasn\'t a dream! She really HAD met dinosaurs!', interactive: false },
+            { illustration: '🦴', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFE699 100%)', text: 'She looked at the dinosaur skeletons with new eyes now.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'These weren\'t just bones - they were her friends!', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'She whispered to the Brachiosaurus skeleton: "Thank you, Bella."', interactive: false },
+            { illustration: '📝', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'That day, Ruby wrote the best school report ever about dinosaurs!', interactive: false },
+            { illustration: '👧', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'She shared what she\'d learned about cooperation, family, and nature\'s balance.', interactive: false },
+            { illustration: '😊', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Her teacher was amazed at how much Ruby understood!', interactive: false },
+
+            // EPILOGUE (Pages 96-100)
+            { illustration: '🏡', background: 'linear-gradient(135deg, #FFF9E0 0%, #FFF0C0 100%)', text: 'At home, Ruby put Arlo\'s stone on her shelf with her dinosaur toys.', interactive: false },
+            { illustration: '🌙', background: 'linear-gradient(135deg, #0F1624 0%, #1E3A8A 100%)', text: 'Every night, she would hold it and remember her adventure.', interactive: false },
+            { illustration: '💭', background: 'linear-gradient(135deg, #E0F7FF 0%, #C0E9FF 100%)', text: 'She learned that even though dinosaurs are gone, their lessons live on.', interactive: false },
+            { illustration: '💪', background: 'linear-gradient(135deg, #FFE5F0 0%, #FFDAE5 100%)', text: 'Work together. Protect each other. Respect all of nature.', interactive: false },
+            { illustration: '🦕', background: 'linear-gradient(135deg, #7FD858 0%, #A7F3D0 100%)', text: 'And Ruby promised to share these lessons with everyone she met. The End! 🦕', interactive: false }
         ]
     }
 };
+
+// ... (keeping all the same sound effects, functions, etc. from before)
 
 // Sound effects (using Web Audio API for simple sounds)
 const sounds = {
@@ -355,49 +609,36 @@ const sounds = {
     crack: { freq: 600, duration: 150 }
 };
 
-// Current story state
 let currentStory = null;
 let currentPage = 0;
 let musicPlaying = false;
-
-// Audio context for sound effects
 let audioContext = null;
 
-// Initialize audio context
 function initAudio() {
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
 }
 
-// Play sound effect
 function playSound(soundType) {
     initAudio();
     const sound = sounds[soundType];
     if (!sound) return;
-
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-
     oscillator.frequency.value = sound.freq;
     oscillator.type = 'sine';
-
     gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + sound.duration / 1000);
-
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + sound.duration / 1000);
 }
 
-// Background music toggle
 function toggleMusic() {
-    const bgMusic = document.getElementById('bg-music');
     const musicIcon = document.getElementById('music-icon');
     const musicText = document.getElementById('music-text');
-
     if (!musicPlaying) {
         musicPlaying = true;
         musicIcon.textContent = '🔇';
@@ -409,16 +650,13 @@ function toggleMusic() {
     }
 }
 
-// Open story reader
 function openStory(storyId) {
     currentStory = stories[storyId];
     currentPage = 0;
-
     if (!currentStory) {
         console.error('Story not found:', storyId);
         return;
     }
-
     const readerHTML = `
         <div class="story-reader active" id="story-reader">
             <div class="story-content">
@@ -435,67 +673,47 @@ function openStory(storyId) {
             </div>
         </div>
     `;
-
     document.body.insertAdjacentHTML('beforeend', readerHTML);
     showPage(0);
 }
 
-// Close story reader
 function closeStory() {
     const reader = document.getElementById('story-reader');
-    if (reader) {
-        reader.remove();
-    }
+    if (reader) reader.remove();
     currentStory = null;
     currentPage = 0;
 }
 
-// Show specific page
 function showPage(pageIndex) {
-    if (!currentStory || pageIndex < 0 || pageIndex >= currentStory.pages.length) {
-        return;
-    }
-
+    if (!currentStory || pageIndex < 0 || pageIndex >= currentStory.pages.length) return;
     currentPage = pageIndex;
     const page = currentStory.pages[pageIndex];
     const storyPage = document.getElementById('story-page');
     const pageNumber = document.getElementById('page-number');
-
     storyPage.innerHTML = `
         <div class="page-illustration" style="background: ${page.background};">
             <span class="story-icon">${page.illustration}</span>
         </div>
         <p class="page-text">${page.text}</p>
     `;
-
     pageNumber.textContent = `${pageIndex + 1} / ${currentStory.pages.length}`;
-
     if (page.interactive) {
         const interactiveElements = storyPage.querySelectorAll('.interactive-element');
         interactiveElements.forEach(element => {
             element.addEventListener('click', function() {
                 const soundType = this.dataset.sound;
-                if (soundType) {
-                    playSound(soundType);
-                }
-
+                if (soundType) playSound(soundType);
                 const animations = ['spin-animation', 'pulse-animation', 'wiggle-animation'];
                 const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-
                 this.classList.add(randomAnimation);
-                setTimeout(() => {
-                    this.classList.remove(randomAnimation);
-                }, 1000);
+                setTimeout(() => this.classList.remove(randomAnimation), 1000);
             });
         });
     }
-
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-
     prevBtn.disabled = pageIndex === 0;
     nextBtn.disabled = pageIndex === currentStory.pages.length - 1;
-
     if (pageIndex === currentStory.pages.length - 1) {
         nextBtn.textContent = '🏠 Home';
         nextBtn.onclick = closeStory;
@@ -503,51 +721,34 @@ function showPage(pageIndex) {
         nextBtn.textContent = 'Next ➡';
         nextBtn.onclick = nextPage;
     }
-
     storyPage.style.animation = 'none';
-    setTimeout(() => {
-        storyPage.style.animation = 'fadeIn 0.5s ease';
-    }, 10);
+    setTimeout(() => storyPage.style.animation = 'fadeIn 0.5s ease', 10);
 }
 
-// Navigate to next page
 function nextPage() {
-    if (currentPage < currentStory.pages.length - 1) {
-        showPage(currentPage + 1);
-    }
+    if (currentPage < currentStory.pages.length - 1) showPage(currentPage + 1);
 }
 
-// Navigate to previous page
 function previousPage() {
-    if (currentPage > 0) {
-        showPage(currentPage - 1);
-    }
+    if (currentPage > 0) showPage(currentPage - 1);
 }
 
-// Initialize app
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Kids Story App Loaded! 🎉');
-
     const storyCards = document.querySelectorAll('.story-card');
     storyCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
     });
 });
 
-// Add keyboard navigation
 document.addEventListener('keydown', function(e) {
     if (currentStory) {
-        if (e.key === 'ArrowRight') {
-            nextPage();
-        } else if (e.key === 'ArrowLeft') {
-            previousPage();
-        } else if (e.key === 'Escape') {
-            closeStory();
-        }
+        if (e.key === 'ArrowRight') nextPage();
+        else if (e.key === 'ArrowLeft') previousPage();
+        else if (e.key === 'Escape') closeStory();
     }
 });
 
-// Prevent text selection on repeated clicks
 document.addEventListener('selectstart', function(e) {
     if (e.target.closest('.story-card') || e.target.closest('.interactive-element')) {
         e.preventDefault();
