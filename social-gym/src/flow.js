@@ -4,11 +4,36 @@
   let F = null; // 当前练习状态
 
   function fresh(id) {
-    return { id, step: 0, shown: 1, notice: '', revealed: false, marks: {}, tStart: 0, firstKey: null, auto: '', autoDone: false, labels: [], feel: '', need: '', pause: ['', '', '', ''], r1: '', r2: '', saved: false, timerId: null };
+    return { id, step: 0, shown: 1, notice: '', revealed: false, marks: {}, tStart: 0, firstKey: null, auto: '', autoDone: false, labels: [], feel: '', need: '', pause: ['', '', '', ''], r1: '', r2: '', saved: false, sessId: null, ai: { review: null, counter: null, loading: {}, err: {}, manual: '' }, timerId: null };
   }
   function stop() { if (F && F.timerId) { clearInterval(F.timerId); F.timerId = null; } }
 
   const stepper = (n) => `<ol class="steps">${[L('① 捕捉信号', '① Notice'), L('② 抓住自动反应', '② Catch'), L('③ 刻意设计', '③ Redesign'), L('④ 老手拆解', '④ Study')].map((x, i) => `<li class="${i === n ? 'on' : i < n ? 'done' : ''}">${x}</li>`).join('')}</ol>`;
+
+
+  const WHICH = () => ({ first: L('第一反应', 'First reaction'), A: L('设计 A', 'Design A'), B: L('设计 B', 'Design B') });
+  function aiResult(kind) {
+    const r = F.ai[kind]; if (!r) return '';
+    if (kind === 'review') {
+      return `<div class="panel ai">${r.noticed_well.length ? `<p><b>${L('你捕捉得不错的', 'What you caught well')}</b></p><ul>${r.noticed_well.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${r.missed.length ? `<p><b>${L('可能漏掉的信号', 'Signals you may have missed')}</b></p><ul>${r.missed.map((m) => `<li><b>${esc(m.signal)}</b> — ${esc(m.why_it_matters)}</li>`).join('')}</ul>` : ''}
+        <p><b>${L('对你第一反应的解读', 'Reading of your first reaction')}</b></p><p>${nl(r.autopilot_read)}</p>
+        ${r.designs.map((d) => `<div class="panel"><b>${L('设计 ', 'Design ')}${esc(d.which)}</b><p>${L('优点：', 'Strengths: ')}${esc(d.strengths)}</p><p>${L('风险：', 'Risks: ')}${esc(d.risks)}</p><blockquote class="say">${esc(d.rewrite)}</blockquote></div>`).join('')}
+        <p><b>${L('下次的小实验', 'Next experiment')}</b></p><p>${nl(r.experiment)}</p></div>`;
+    }
+    return `<div class="panel ai">${r.reactions.map((x) => `<div class="panel"><b>${esc(WHICH()[x.which] || x.which)}</b><blockquote class="say">${esc(x.reply)}</blockquote><p class="muted">${L('对方心里：', 'Inside their head: ')}${esc(x.inner)}</p></div>`).join('')}<p><b>${L('差异', 'The difference')}</b></p><p>${nl(r.takeaway)}</p></div>`;
+  }
+  function aiPanel() {
+    const key = !!state.aiKey, ld = F.ai.loading, er = F.ai.err;
+    const btn = (id, label, kind) => `<button class="btn small" id="${id}" ${ld[kind] ? 'disabled' : ''}>${ld[kind] ? L('思考中…', 'Thinking…') : label}</button>`;
+    return `<h2>${L('AI 点评', 'AI feedback')}</h2>
+      <p class="muted">${key ? L('点击后会把你写的内容发送给 Claude。结果是镜子式的观察，不打分。', 'Clicking sends what you wrote to Claude. The result is a mirror, not a grade.') : L('还没设置 API key。你可以去设置页填写，或先“复制点评提示词”粘贴到任意 Claude 对话。', 'No API key set. Add one in Settings, or copy the prompt into any Claude chat.')}</p>
+      <div class="row" style="justify-content:flex-start">${key ? btn('aiReview', L('AI 点评我的回应', 'AI review'), 'review') + btn('aiCounter', L('对方可能怎么回', 'How might they reply'), 'counter') : ''}
+        <button class="btn small ghost" id="cpReview">${L('复制点评提示词', 'Copy review prompt')}</button><button class="btn small ghost" id="cpCounter">${L('复制“对方反应”提示词', 'Copy reply prompt')}</button></div>
+      ${er.review ? `<p class="err">${esc(er.review)}</p>` : ''}${er.counter ? `<p class="err">${esc(er.counter)}</p>` : ''}
+      ${F.ai.manual ? `<label>${L('浏览器不允许自动复制，请手动全选复制：', 'Auto-copy is blocked — select all and copy:')}<textarea rows="6" readonly onclick="this.select()">${esc(F.ai.manual)}</textarea></label>` : ''}
+      ${aiResult('review')}${aiResult('counter')}`;
+  }
 
   window.SG.route('practice', (args) => {
     const s = byId(args[0]);
@@ -57,6 +82,7 @@
 
     // step 3 Study
     return head + `<div class="panel cmp"><div><p class="muted">${L('第一反应', 'First reaction')}</p><p>${nl(F.auto)}</p></div>${F.r1 ? `<div><p class="muted">${L('设计 A', 'Design A')}</p><p>${nl(F.r1)}</p></div>` : ''}${F.r2 ? `<div><p class="muted">${L('设计 B', 'Design B')}</p><p>${nl(F.r2)}</p></div>` : ''}</div>
+      ${aiPanel()}
       <h2>${L('老手的回应', 'How a veteran might respond')}</h2><p class="muted">${L('这些是示范思路，不是万能模板。重点看“机制”，然后用你自己的口吻说。', 'These are examples, not templates. Focus on the mechanism, then say it your way.')}</p>
       ${s.veteran.map((v) => `<div class="panel vet"><blockquote class="say">${esc(t(v.say))}</blockquote><div class="chips">${v.mech.map((k) => `<button class="chip ${state.toolbox.indexOf(k) >= 0 ? 'on' : ''}" data-tool="${k}" title="${L('点击收藏到工具箱', 'Click to save to toolbox')}">${state.toolbox.indexOf(k) >= 0 ? '★ ' : '☆ '}${esc(t(TAX.mechanisms[k]))}</button>`).join('')}</div>
         <p><b>${L('为什么有效：', 'Why it works: ')}</b>${esc(v.why)}</p><p><b>${L('边界/风险：', 'Limits: ')}</b>${esc(v.limits)}</p><p><b>${L('语气与时机：', 'Delivery: ')}</b>${esc(v.delivery)}</p></div>`).join('')}
@@ -98,7 +124,8 @@
       $('#toStudy').onclick = () => {
         if (!F.saved) {
           F.saved = true;
-          state.sessions.push({ id: String(Date.now()), sid: s.id, ts: Date.now(), noticed: Object.assign({}, F.marks), notice: F.notice,
+          F.sessId = String(Date.now());
+          state.sessions.push({ id: F.sessId, sid: s.id, ts: Date.now(), noticed: Object.assign({}, F.marks), notice: F.notice,
             auto: { text: F.auto, labels: F.labels.slice(), feel: F.feel, need: F.need, latency: F.firstKey, duration: F.duration },
             redesign: { pause: F.pause.slice(), r1: F.r1, r2: F.r2 } });
           save();
@@ -107,6 +134,27 @@
       };
     } else {
       $$('[data-tool]').forEach((el) => { el.onclick = () => { window.SG.toggleTool(el.dataset.tool); rr(); }; });
+
+      const run = async (kind) => {
+        const mine = F;
+        mine.ai.loading[kind] = true; mine.ai.err[kind] = '';
+        rr();
+        try {
+          mine.ai[kind] = await window.SG.ai.call(kind, s, mine);
+          const sess = state.sessions.find((x) => x.id === mine.sessId);
+          if (sess) { sess.ai = sess.ai || {}; sess.ai[kind] = mine.ai[kind]; save(); }
+        } catch (e) { mine.ai.err[kind] = window.SG.ai.errMsg(e); }
+        mine.ai.loading[kind] = false;
+        if (F === mine && /^practice\//.test(window.SG.path())) rr();
+      };
+      const copy = async (kind) => {
+        const txt = window.SG.ai.promptText(kind, s, F);
+        try { await navigator.clipboard.writeText(txt); F.ai.manual = ''; alert(L('已复制，去 Claude 对话里粘贴即可。', 'Copied — paste it into a Claude chat.')); }
+        catch (e) { F.ai.manual = txt; rr(); }
+      };
+      const bb = (id, fn) => { const el = $(id); if (el) el.onclick = fn; };
+      bb('#aiReview', () => run('review')); bb('#aiCounter', () => run('counter'));
+      bb('#cpReview', () => copy('review')); bb('#cpCounter', () => copy('counter'));
       $('#again').onclick = () => { F = fresh(s.id); rr(); };
     }
   });

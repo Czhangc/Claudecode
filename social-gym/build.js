@@ -1,6 +1,6 @@
 // 把 src/ 内联成单文件 index.html（无外部依赖，任何方式打开都能运行）。用法：node build.js
 const fs = require('fs'), r = (f) => fs.readFileSync(__dirname + '/src/' + f, 'utf8').replace(/<\/script/gi, '<\\/script');
-const js = ['taxonomy.js', 'scenarios.js', 'micro-experiments.js', 'app.js', 'flow.js'].map(r).join('\n;\n');
+const js = ['taxonomy.js', 'scenarios.js', 'micro-experiments.js', 'app.js', 'ai.js', 'flow.js'].map(r).join('\n;\n');
 fs.writeFileSync(__dirname + '/index.html', `<!doctype html>
 <html lang="zh-CN">
 <head>

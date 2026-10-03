@@ -1,7 +1,7 @@
 // Social Gym — 核心：状态、存档、路由、除练习流程以外的页面。全部离线，无网络请求。
 (function () {
   const KEY = 'socialgym.v1';
-  const DEFAULTS = { lang: 'zh', timer: 8, sessions: [], toolbox: [], intents: [], expDone: {} };
+  const DEFAULTS = { lang: 'zh', timer: 8, aiKey: '', aiModel: 'claude-opus-5-5', sessions: [], toolbox: [], intents: [], expDone: {} };
   let memory = null; // localStorage 不可用时的降级存储
 
   function load() {
@@ -181,20 +181,26 @@
     return `<section><h1>${L('设置', 'Settings')}</h1>
       <div class="panel"><label>${L('语言', 'Language')}<select id="lang"><option value="zh" ${state.lang === 'zh' ? 'selected' : ''}>中文（场景分析为中文，标题与话术附英文）</option><option value="en" ${state.lang === 'en' ? 'selected' : ''}>English (scenario analysis stays in Chinese)</option></select></label>
       <label>${L('第一反应倒计时（秒）', 'First-reaction timer (seconds)')}<input id="timer" type="number" min="3" max="30" value="${state.timer}"></label></div>
+      <div class="panel"><h3>${L('AI 点评（可选）', 'AI feedback (optional)')}</h3>
+      <p class="muted">${L('填入你自己的 Anthropic API key 后，练习结束页会出现“AI 点评”和“对方可能怎么回”。只有点击这些按钮时，才会把你写的内容发送到 api.anthropic.com。key 只保存在本机浏览器，不会出现在导出文件里。仅限个人使用，不要把填了 key 的页面公开部署。不填则完全离线，仍可“复制点评提示词”粘贴到任意 Claude 对话。', 'With your own Anthropic API key, the Study page offers “AI review” and “How might they reply”. Your text is sent to api.anthropic.com only when you click them. The key stays in this browser and is never exported. Personal use only — don’t publish a page with a key filled in. Without a key everything stays offline, and you can still copy the review prompt into any Claude chat.')}</p>
+      <label>API key<input id="aikey" type="password" autocomplete="off" placeholder="sk-ant-…" value="${esc(state.aiKey)}"></label>
+      <label>${L('模型', 'Model')}<select id="aimodel"><option value="claude-opus-5-5" ${state.aiModel === 'claude-opus-5-5' ? 'selected' : ''}>Claude Opus 5.5 (${L('默认，质量最好', 'default, best quality')})</option><option value="claude-sonnet-5-5" ${state.aiModel === 'claude-sonnet-5-5' ? 'selected' : ''}>Claude Sonnet 5.5 (${L('更快更便宜', 'faster, cheaper')})</option></select></label></div>
       <div class="panel"><p>${L('数据只存在这台设备的浏览器里，不会上传。换设备请导出/导入。', 'Data lives only in this browser and is never uploaded. Export/import to move devices.')}</p>
       <button class="btn" id="exp">${L('导出 JSON', 'Export JSON')}</button> <label class="btn ghost">${L('导入 JSON', 'Import JSON')}<input id="imp" type="file" accept="application/json" hidden></label>
       <button class="btn ghost danger" id="reset">${L('清空所有数据', 'Erase all data')}</button></div></section>`;
   };
   routes['settings:bind'] = function () {
     $('#lang').onchange = (e) => { state.lang = e.target.value; save(); SG.render(); };
+    $('#aikey').onchange = (e) => { state.aiKey = e.target.value.trim(); save(); };
+    $('#aimodel').onchange = (e) => { state.aiModel = e.target.value; save(); };
     $('#timer').onchange = (e) => { state.timer = Math.max(3, Math.min(30, parseInt(e.target.value, 10) || 8)); save(); };
     $('#exp').onclick = () => {
-      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' })); a.download = 'social-gym-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(state, (k, v) => (k === 'aiKey' ? undefined : v), 2)], { type: 'application/json' })); a.download = 'social-gym-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     };
     $('#imp').onchange = (e) => {
       const f = e.target.files[0]; if (!f) return;
       const r = new FileReader();
-      r.onload = () => { try { const d = JSON.parse(r.result); if (!d || !Array.isArray(d.sessions)) throw 0; Object.assign(state, DEFAULTS, d); save(); alert(L('导入成功', 'Imported')); SG.render(); } catch (x) { alert(L('文件格式不正确', 'Invalid file')); } };
+      r.onload = () => { try { const d = JSON.parse(r.result); if (!d || !Array.isArray(d.sessions)) throw 0; const keep = { aiKey: state.aiKey, aiModel: state.aiModel }; Object.assign(state, DEFAULTS, d, keep); save(); alert(L('导入成功', 'Imported')); SG.render(); } catch (x) { alert(L('文件格式不正确', 'Invalid file')); } };
       r.readAsText(f);
     };
     $('#reset').onclick = () => { if (confirm(L('确定清空所有练习与日志？无法恢复。', 'Erase all practice and journal data? This cannot be undone.'))) { Object.assign(state, JSON.parse(JSON.stringify(DEFAULTS))); save(); SG.render(); } };

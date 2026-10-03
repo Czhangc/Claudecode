@@ -56,6 +56,8 @@ blockquote.say{font-size:17px}blockquote cite{display:block;font-size:12px;color
 .bn{color:var(--mute);text-align:right}
 @media(max-width:480px){.bar{grid-template-columns:80px 1fr 44px}}
 
+.err{color:var(--accent);font-size:14px}.ai{border-left:3px solid var(--accent2)}.ai ul{margin:.3em 0 .8em;padding-left:1.2em}
+
 </style>
 </head>
 <body>
@@ -600,7 +602,7 @@ window.EXPERIMENTS = [
 // Social Gym — 核心：状态、存档、路由、除练习流程以外的页面。全部离线，无网络请求。
 (function () {
   const KEY = 'socialgym.v1';
-  const DEFAULTS = { lang: 'zh', timer: 8, sessions: [], toolbox: [], intents: [], expDone: {} };
+  const DEFAULTS = { lang: 'zh', timer: 8, aiKey: '', aiModel: 'claude-opus-5-5', sessions: [], toolbox: [], intents: [], expDone: {} };
   let memory = null; // localStorage 不可用时的降级存储
 
   function load() {
@@ -780,20 +782,26 @@ window.EXPERIMENTS = [
     return `<section><h1>${L('设置', 'Settings')}</h1>
       <div class="panel"><label>${L('语言', 'Language')}<select id="lang"><option value="zh" ${state.lang === 'zh' ? 'selected' : ''}>中文（场景分析为中文，标题与话术附英文）</option><option value="en" ${state.lang === 'en' ? 'selected' : ''}>English (scenario analysis stays in Chinese)</option></select></label>
       <label>${L('第一反应倒计时（秒）', 'First-reaction timer (seconds)')}<input id="timer" type="number" min="3" max="30" value="${state.timer}"></label></div>
+      <div class="panel"><h3>${L('AI 点评（可选）', 'AI feedback (optional)')}</h3>
+      <p class="muted">${L('填入你自己的 Anthropic API key 后，练习结束页会出现“AI 点评”和“对方可能怎么回”。只有点击这些按钮时，才会把你写的内容发送到 api.anthropic.com。key 只保存在本机浏览器，不会出现在导出文件里。仅限个人使用，不要把填了 key 的页面公开部署。不填则完全离线，仍可“复制点评提示词”粘贴到任意 Claude 对话。', 'With your own Anthropic API key, the Study page offers “AI review” and “How might they reply”. Your text is sent to api.anthropic.com only when you click them. The key stays in this browser and is never exported. Personal use only — don’t publish a page with a key filled in. Without a key everything stays offline, and you can still copy the review prompt into any Claude chat.')}</p>
+      <label>API key<input id="aikey" type="password" autocomplete="off" placeholder="sk-ant-…" value="${esc(state.aiKey)}"></label>
+      <label>${L('模型', 'Model')}<select id="aimodel"><option value="claude-opus-5-5" ${state.aiModel === 'claude-opus-5-5' ? 'selected' : ''}>Claude Opus 5.5 (${L('默认，质量最好', 'default, best quality')})</option><option value="claude-sonnet-5-5" ${state.aiModel === 'claude-sonnet-5-5' ? 'selected' : ''}>Claude Sonnet 5.5 (${L('更快更便宜', 'faster, cheaper')})</option></select></label></div>
       <div class="panel"><p>${L('数据只存在这台设备的浏览器里，不会上传。换设备请导出/导入。', 'Data lives only in this browser and is never uploaded. Export/import to move devices.')}</p>
       <button class="btn" id="exp">${L('导出 JSON', 'Export JSON')}</button> <label class="btn ghost">${L('导入 JSON', 'Import JSON')}<input id="imp" type="file" accept="application/json" hidden></label>
       <button class="btn ghost danger" id="reset">${L('清空所有数据', 'Erase all data')}</button></div></section>`;
   };
   routes['settings:bind'] = function () {
     $('#lang').onchange = (e) => { state.lang = e.target.value; save(); SG.render(); };
+    $('#aikey').onchange = (e) => { state.aiKey = e.target.value.trim(); save(); };
+    $('#aimodel').onchange = (e) => { state.aiModel = e.target.value; save(); };
     $('#timer').onchange = (e) => { state.timer = Math.max(3, Math.min(30, parseInt(e.target.value, 10) || 8)); save(); };
     $('#exp').onclick = () => {
-      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' })); a.download = 'social-gym-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(state, (k, v) => (k === 'aiKey' ? undefined : v), 2)], { type: 'application/json' })); a.download = 'social-gym-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     };
     $('#imp').onchange = (e) => {
       const f = e.target.files[0]; if (!f) return;
       const r = new FileReader();
-      r.onload = () => { try { const d = JSON.parse(r.result); if (!d || !Array.isArray(d.sessions)) throw 0; Object.assign(state, DEFAULTS, d); save(); alert(L('导入成功', 'Imported')); SG.render(); } catch (x) { alert(L('文件格式不正确', 'Invalid file')); } };
+      r.onload = () => { try { const d = JSON.parse(r.result); if (!d || !Array.isArray(d.sessions)) throw 0; const keep = { aiKey: state.aiKey, aiModel: state.aiModel }; Object.assign(state, DEFAULTS, d, keep); save(); alert(L('导入成功', 'Imported')); SG.render(); } catch (x) { alert(L('文件格式不正确', 'Invalid file')); } };
       r.readAsText(f);
     };
     $('#reset').onclick = () => { if (confirm(L('确定清空所有练习与日志？无法恢复。', 'Erase all practice and journal data? This cannot be undone.'))) { Object.assign(state, JSON.parse(JSON.stringify(DEFAULTS))); save(); SG.render(); } };
@@ -803,17 +811,130 @@ window.EXPERIMENTS = [
 })();
 
 ;
+// 可选的 Claude 点评层。默认不启用；仅在设置了 API key 且用户点击按钮时才联网。
+(function () {
+  const { state, L } = window.SG;
+  const URL = 'https://api.anthropic.com/v1/messages';
+
+  const SYSTEM = `你是一位社交觉察教练，帮助用户通过情境演练提升对社交信号的敏感度、觉察自己的自动反应（autopilot），并学会刻意设计回应而不是 react。
+原则：
+- 你是"镜子"和教练，不是评委：不打分、不给"对/错"结论，不给用户贴人格标签。
+- 先具体肯定（引用用户的原话），再指出盲区；每条判断都基于场景里的具体线索或用户写下的内容。
+- 承认语境不确定：用"可能""如果……"，不要把推断说成事实。
+- 对用户的第一反应，要解读它可能体现的自动模式与背后的需求，并与用户自己选的标签对照（一致或不同都可以，说明理由）。
+- 点评设计版回应时，说明它对"对方"和"关系"的可能影响，并给出一个更自然、口语化的改写。
+- 不推荐操控、羞辱或贬低对方的话术；若用户的回应有这类倾向，温和指出其代价。
+- 语气温暖、具体、简洁。用与用户界面相同的语言回答（用户语言：{LANG}）。`;
+
+  const REVIEW_SCHEMA = {
+    type: 'object', additionalProperties: false,
+    required: ['noticed_well', 'missed', 'autopilot_read', 'designs', 'experiment'],
+    properties: {
+      noticed_well: { type: 'array', items: { type: 'string' } },
+      missed: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['signal', 'why_it_matters'], properties: { signal: { type: 'string' }, why_it_matters: { type: 'string' } } } },
+      autopilot_read: { type: 'string' },
+      designs: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['which', 'strengths', 'risks', 'rewrite'], properties: { which: { type: 'string' }, strengths: { type: 'string' }, risks: { type: 'string' }, rewrite: { type: 'string' } } } },
+      experiment: { type: 'string' }
+    }
+  };
+  const COUNTER_SCHEMA = {
+    type: 'object', additionalProperties: false, required: ['reactions', 'takeaway'],
+    properties: {
+      reactions: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['which', 'reply', 'inner'], properties: { which: { type: 'string' }, reply: { type: 'string' }, inner: { type: 'string' } } } },
+      takeaway: { type: 'string' }
+    }
+  };
+
+  // 把场景 + 用户所写的一切整理成给模型的文本
+  function context(s, F) {
+    const T = window.TAX, t = window.SG.t;
+    const tl = s.timeline.map((b, i) => `${i + 1}. ${b[0]}：${b[1]}${b[2] ? `（${b[2]}）` : ''}`).join('\n');
+    const sigs = s.signals.map((g) => `- [${t(T.signals[g.type])}/${t(T.layers[g.layer])}] ${g.text}（用户自评：${F.marks[g.id] ? '注意到了' : '漏掉了'}）`).join('\n');
+    const labels = F.labels.map((k) => t(T.autopilot[k])).join('、') || '（未选）';
+    return `【场景】${t(s.setup)}\n【对话/线索】\n${tl}\n【用户需要回应的问题】${t(s.prompt) || '你怎么回应？'}\n
+【标注信号及用户自评】\n${sigs}\n【用户自己写的“我注意到了什么”】${F.notice || '（空）'}\n
+【用户的第一反应（限时原样）】${F.auto}\n【用户给它起的自动模式标签】${labels}\n【当时的身体/情绪】${F.feel || '（空）'}\n【被触发的需求/假设】${F.need || '（空）'}\n
+【暂停四问】想要的结果：${F.pause[0] || '—'}；对方需要：${F.pause[1] || '—'}；长期关系：${F.pause[2] || '—'}；面子/权力：${F.pause[3] || '—'}\n【设计版 A】${F.r1 || '（未写）'}\n【设计版 B】${F.r2 || '（未写）'}`;
+  }
+  const sys = () => SYSTEM.replace('{LANG}', state.lang === 'en' ? 'English' : '中文');
+  const TASKS = {
+    review: '请对用户的这次练习给出镜子式点评（JSON）：noticed_well（用户捕捉得好的，引用其原话）；missed（用户漏掉的信号及它为什么重要）；autopilot_read（对第一反应的解读，并与用户自选标签对照）；designs（对设计版 A、B 各一项，which 填 "A"/"B"，未写的版本不要列；说明优点、风险与更自然的改写 rewrite）；experiment（一个下次可做的小实验）。',
+    counter: '请扮演场景中的“对方”，分别对用户的第一反应（which 填 "first"）、设计版 A（"A"）、设计版 B（"B"）做出真实的口语化反应（reply，1–3 句），并写出对方此刻内心的真实想法（inner）；未写的版本不要列。最后给一句 takeaway：这几种回应带来的差异。'
+  };
+
+  const PLAIN = {
+    review: '请对用户的这次练习给出镜子式点评，分成：1) 你捕捉得好的（引用原话）；2) 你可能漏掉的信号及原因；3) 对你第一反应的解读（并与用户自选标签对照）；4) 对设计版 A、B 各自的优点、风险和更自然的改写；5) 一个下次可做的小实验。',
+    counter: '请扮演场景中的“对方”，分别对用户的第一反应、设计版 A、设计版 B 做出真实的口语化反应（1–3 句），并写出对方此刻内心的真实想法；最后一句总结这几种回应带来的差异。'
+  };
+  function errMsg(e) {
+    if (e && e.kind) return e.msg;
+    return L('网络请求失败（可能是断网，或当前预览环境不允许访问外网）。', 'Network request failed (offline, or this preview blocks outside requests).');
+  }
+  async function call(kind, s, F) {
+    if (!state.aiKey) throw { kind: 'nokey', msg: L('请先在设置里填写 API key。', 'Add your API key in Settings first.') };
+    const body = {
+      model: state.aiModel || 'claude-opus-5-5', max_tokens: 4000, system: sys(),
+      messages: [{ role: 'user', content: context(s, F) + '\n\n' + TASKS[kind] }],
+      output_config: { effort: 'low', format: { type: 'json_schema', schema: kind === 'review' ? REVIEW_SCHEMA : COUNTER_SCHEMA } }
+    };
+    const res = await fetch(URL, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': state.aiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify(body) });
+    if (!res.ok) {
+      const m = { 401: L('API key 无效或没有权限。', 'Invalid API key.'), 403: L('没有权限访问该模型。', 'No access to this model.'), 404: L('找不到该模型，请在设置里换一个。', 'Model not found — pick another in Settings.'), 429: L('请求太频繁或额度受限，请稍后再试。', 'Rate limited — try again shortly.') }[res.status]
+        || (res.status >= 500 ? L('服务暂时不可用，请稍后重试。', 'Service temporarily unavailable.') : L('请求出错（' + res.status + '）。', 'Request failed (' + res.status + ').'));
+      throw { kind: 'http', status: res.status, msg: m };
+    }
+    const data = await res.json();
+    if (data.stop_reason === 'refusal') throw { kind: 'refusal', msg: L('模型拒绝了这次请求，请换种写法再试。', 'The model declined this request.') };
+    if (data.stop_reason === 'max_tokens') throw { kind: 'trunc', msg: L('回复被截断了，请重试。', 'Reply was truncated — retry.') };
+    const txt = (data.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('');
+    try { return JSON.parse(txt); } catch (e) { throw { kind: 'parse', msg: L('没能解析点评结果，请重试。', 'Could not parse the reply — retry.') }; }
+  }
+
+  // 无 key 时的兜底：把同一份提示词复制出去，贴到任意 Claude 对话
+  function promptText(kind, s, F) {
+    return sys() + '\n\n' + context(s, F) + '\n\n' + PLAIN[kind];
+  }
+
+  window.SG.ai = { call, errMsg, promptText };
+})();
+
+;
 // 练习流程：Notice → Catch → Redesign → Study
 (function () {
   const { state, save, L, t, esc, nl, $, $$, byId, dimTag } = window.SG;
   let F = null; // 当前练习状态
 
   function fresh(id) {
-    return { id, step: 0, shown: 1, notice: '', revealed: false, marks: {}, tStart: 0, firstKey: null, auto: '', autoDone: false, labels: [], feel: '', need: '', pause: ['', '', '', ''], r1: '', r2: '', saved: false, timerId: null };
+    return { id, step: 0, shown: 1, notice: '', revealed: false, marks: {}, tStart: 0, firstKey: null, auto: '', autoDone: false, labels: [], feel: '', need: '', pause: ['', '', '', ''], r1: '', r2: '', saved: false, sessId: null, ai: { review: null, counter: null, loading: {}, err: {}, manual: '' }, timerId: null };
   }
   function stop() { if (F && F.timerId) { clearInterval(F.timerId); F.timerId = null; } }
 
   const stepper = (n) => `<ol class="steps">${[L('① 捕捉信号', '① Notice'), L('② 抓住自动反应', '② Catch'), L('③ 刻意设计', '③ Redesign'), L('④ 老手拆解', '④ Study')].map((x, i) => `<li class="${i === n ? 'on' : i < n ? 'done' : ''}">${x}</li>`).join('')}</ol>`;
+
+
+  const WHICH = () => ({ first: L('第一反应', 'First reaction'), A: L('设计 A', 'Design A'), B: L('设计 B', 'Design B') });
+  function aiResult(kind) {
+    const r = F.ai[kind]; if (!r) return '';
+    if (kind === 'review') {
+      return `<div class="panel ai">${r.noticed_well.length ? `<p><b>${L('你捕捉得不错的', 'What you caught well')}</b></p><ul>${r.noticed_well.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${r.missed.length ? `<p><b>${L('可能漏掉的信号', 'Signals you may have missed')}</b></p><ul>${r.missed.map((m) => `<li><b>${esc(m.signal)}</b> — ${esc(m.why_it_matters)}</li>`).join('')}</ul>` : ''}
+        <p><b>${L('对你第一反应的解读', 'Reading of your first reaction')}</b></p><p>${nl(r.autopilot_read)}</p>
+        ${r.designs.map((d) => `<div class="panel"><b>${L('设计 ', 'Design ')}${esc(d.which)}</b><p>${L('优点：', 'Strengths: ')}${esc(d.strengths)}</p><p>${L('风险：', 'Risks: ')}${esc(d.risks)}</p><blockquote class="say">${esc(d.rewrite)}</blockquote></div>`).join('')}
+        <p><b>${L('下次的小实验', 'Next experiment')}</b></p><p>${nl(r.experiment)}</p></div>`;
+    }
+    return `<div class="panel ai">${r.reactions.map((x) => `<div class="panel"><b>${esc(WHICH()[x.which] || x.which)}</b><blockquote class="say">${esc(x.reply)}</blockquote><p class="muted">${L('对方心里：', 'Inside their head: ')}${esc(x.inner)}</p></div>`).join('')}<p><b>${L('差异', 'The difference')}</b></p><p>${nl(r.takeaway)}</p></div>`;
+  }
+  function aiPanel() {
+    const key = !!state.aiKey, ld = F.ai.loading, er = F.ai.err;
+    const btn = (id, label, kind) => `<button class="btn small" id="${id}" ${ld[kind] ? 'disabled' : ''}>${ld[kind] ? L('思考中…', 'Thinking…') : label}</button>`;
+    return `<h2>${L('AI 点评', 'AI feedback')}</h2>
+      <p class="muted">${key ? L('点击后会把你写的内容发送给 Claude。结果是镜子式的观察，不打分。', 'Clicking sends what you wrote to Claude. The result is a mirror, not a grade.') : L('还没设置 API key。你可以去设置页填写，或先“复制点评提示词”粘贴到任意 Claude 对话。', 'No API key set. Add one in Settings, or copy the prompt into any Claude chat.')}</p>
+      <div class="row" style="justify-content:flex-start">${key ? btn('aiReview', L('AI 点评我的回应', 'AI review'), 'review') + btn('aiCounter', L('对方可能怎么回', 'How might they reply'), 'counter') : ''}
+        <button class="btn small ghost" id="cpReview">${L('复制点评提示词', 'Copy review prompt')}</button><button class="btn small ghost" id="cpCounter">${L('复制“对方反应”提示词', 'Copy reply prompt')}</button></div>
+      ${er.review ? `<p class="err">${esc(er.review)}</p>` : ''}${er.counter ? `<p class="err">${esc(er.counter)}</p>` : ''}
+      ${F.ai.manual ? `<label>${L('浏览器不允许自动复制，请手动全选复制：', 'Auto-copy is blocked — select all and copy:')}<textarea rows="6" readonly onclick="this.select()">${esc(F.ai.manual)}</textarea></label>` : ''}
+      ${aiResult('review')}${aiResult('counter')}`;
+  }
 
   window.SG.route('practice', (args) => {
     const s = byId(args[0]);
@@ -862,6 +983,7 @@ window.EXPERIMENTS = [
 
     // step 3 Study
     return head + `<div class="panel cmp"><div><p class="muted">${L('第一反应', 'First reaction')}</p><p>${nl(F.auto)}</p></div>${F.r1 ? `<div><p class="muted">${L('设计 A', 'Design A')}</p><p>${nl(F.r1)}</p></div>` : ''}${F.r2 ? `<div><p class="muted">${L('设计 B', 'Design B')}</p><p>${nl(F.r2)}</p></div>` : ''}</div>
+      ${aiPanel()}
       <h2>${L('老手的回应', 'How a veteran might respond')}</h2><p class="muted">${L('这些是示范思路，不是万能模板。重点看“机制”，然后用你自己的口吻说。', 'These are examples, not templates. Focus on the mechanism, then say it your way.')}</p>
       ${s.veteran.map((v) => `<div class="panel vet"><blockquote class="say">${esc(t(v.say))}</blockquote><div class="chips">${v.mech.map((k) => `<button class="chip ${state.toolbox.indexOf(k) >= 0 ? 'on' : ''}" data-tool="${k}" title="${L('点击收藏到工具箱', 'Click to save to toolbox')}">${state.toolbox.indexOf(k) >= 0 ? '★ ' : '☆ '}${esc(t(TAX.mechanisms[k]))}</button>`).join('')}</div>
         <p><b>${L('为什么有效：', 'Why it works: ')}</b>${esc(v.why)}</p><p><b>${L('边界/风险：', 'Limits: ')}</b>${esc(v.limits)}</p><p><b>${L('语气与时机：', 'Delivery: ')}</b>${esc(v.delivery)}</p></div>`).join('')}
@@ -903,7 +1025,8 @@ window.EXPERIMENTS = [
       $('#toStudy').onclick = () => {
         if (!F.saved) {
           F.saved = true;
-          state.sessions.push({ id: String(Date.now()), sid: s.id, ts: Date.now(), noticed: Object.assign({}, F.marks), notice: F.notice,
+          F.sessId = String(Date.now());
+          state.sessions.push({ id: F.sessId, sid: s.id, ts: Date.now(), noticed: Object.assign({}, F.marks), notice: F.notice,
             auto: { text: F.auto, labels: F.labels.slice(), feel: F.feel, need: F.need, latency: F.firstKey, duration: F.duration },
             redesign: { pause: F.pause.slice(), r1: F.r1, r2: F.r2 } });
           save();
@@ -912,6 +1035,27 @@ window.EXPERIMENTS = [
       };
     } else {
       $$('[data-tool]').forEach((el) => { el.onclick = () => { window.SG.toggleTool(el.dataset.tool); rr(); }; });
+
+      const run = async (kind) => {
+        const mine = F;
+        mine.ai.loading[kind] = true; mine.ai.err[kind] = '';
+        rr();
+        try {
+          mine.ai[kind] = await window.SG.ai.call(kind, s, mine);
+          const sess = state.sessions.find((x) => x.id === mine.sessId);
+          if (sess) { sess.ai = sess.ai || {}; sess.ai[kind] = mine.ai[kind]; save(); }
+        } catch (e) { mine.ai.err[kind] = window.SG.ai.errMsg(e); }
+        mine.ai.loading[kind] = false;
+        if (F === mine && /^practice\//.test(window.SG.path())) rr();
+      };
+      const copy = async (kind) => {
+        const txt = window.SG.ai.promptText(kind, s, F);
+        try { await navigator.clipboard.writeText(txt); F.ai.manual = ''; alert(L('已复制，去 Claude 对话里粘贴即可。', 'Copied — paste it into a Claude chat.')); }
+        catch (e) { F.ai.manual = txt; rr(); }
+      };
+      const bb = (id, fn) => { const el = $(id); if (el) el.onclick = fn; };
+      bb('#aiReview', () => run('review')); bb('#aiCounter', () => run('counter'));
+      bb('#cpReview', () => copy('review')); bb('#cpCounter', () => copy('counter'));
       $('#again').onclick = () => { F = fresh(s.id); rr(); };
     }
   });
