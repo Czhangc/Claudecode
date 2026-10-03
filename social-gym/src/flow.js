@@ -111,5 +111,5 @@
     }
   });
 
-  window.addEventListener('hashchange', () => { if (!/^#\/practice\//.test(location.hash)) stop(); });
+  window.SG.onRoute.push((p) => { if (p.indexOf('practice/') !== 0) stop(); });
 })();

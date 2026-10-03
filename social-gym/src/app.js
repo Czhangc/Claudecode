@@ -33,15 +33,18 @@
 
   /* ---------- 路由 ---------- */
   const routes = {};
+  // 路由不依赖 location.hash（沙箱 iframe/预览里锚点跳转可能失效），点击由代理接管
+  let path = (location.hash || '').replace(/^#\/?/, '');
+  SG.path = () => path;
   SG.route = (name, fn) => { routes[name] = fn; };
   function nav() {
     const items = [['home', L('今日', 'Today')], ['library', L('场景库', 'Library')], ['mirror', L('模式镜', 'Mirror')], ['toolbox', L('工具箱', 'Toolbox')], ['journal', L('日志', 'Journal')], ['settings', L('设置', 'Settings')]];
-    const cur = (location.hash.replace(/^#\/?/, '').split('/')[0]) || 'home';
+    const cur = path.split('/')[0] || 'home';
     return items.map(([k, v]) => `<a href="#/${k}" class="${cur === k || (cur === 'practice' && k === 'library') ? 'on' : ''}">${v}</a>`).join('');
   }
   SG.render = function () {
     document.documentElement.lang = state.lang === 'en' ? 'en' : 'zh-CN';
-    const parts = location.hash.replace(/^#\/?/, '').split('/');
+    const parts = path.split('/');
     const name = parts[0] || 'home';
     const fn = routes[name] || routes.home;
     $('#nav').innerHTML = nav();
@@ -50,11 +53,23 @@
     if (bind) bind(parts.slice(1));
     window.scrollTo(0, 0);
   };
-  SG.go = (h) => { if (location.hash === h) SG.render(); else location.hash = h; };
+  SG.go = (h) => {
+    path = String(h).replace(/^#\/?/, '');
+    try { history.replaceState(null, '', '#/' + path); } catch (e) { /* 沙箱中忽略 */ }
+    (SG.onRoute || []).forEach((f) => f(path));
+    SG.render();
+  };
   SG.rerender = function () { // 保持滚动位置的就地重绘
     const y = window.scrollY; SG.render(); window.scrollTo(0, y);
   };
-  window.addEventListener('hashchange', () => SG.render());
+  SG.onRoute = [];
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('a[href^="#/"]');
+    if (!el) return;
+    e.preventDefault();
+    SG.go(el.getAttribute('href'));
+  });
+  window.addEventListener('hashchange', () => { path = location.hash.replace(/^#\/?/, ''); SG.render(); });
 
   /* ---------- 小组件 ---------- */
   const dimTag = (s) => `<span class="tag">${esc(t(TAX.domains[s.domain]))}</span><span class="tag alt">${esc(t(TAX.topics[s.topic]))}</span><span class="tag cx${complexity(s)}">${cxLabel(complexity(s))}</span>`;
