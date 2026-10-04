@@ -438,3 +438,247 @@ window.SCENARIOS = [];
     pitfalls: [{ say: '（一直看手机/左右张望，不说话）', cost: '暗示不耐烦却不明说，会让对方更难堪，也让你显得不真诚。' }]
   });
 })();
+
+(function () {
+  const S = (o) => window.SCENARIOS.push(o);
+
+  /* ================= 读懂他人 / 复杂局面 ================= */
+  S({ id: 'r1', domain: 'read', topic: 'read', dims: { parties: 5, subtext: 3, power: 3, heat: 2 },
+    title: { zh: '会议室里的“挺好的”', en: 'Everyone says “looks good”' },
+    setup: { zh: '你在评审会上提出一个新方案。同事们纷纷说“挺好的”“可以的”，只有老板一直没说话，低头翻着材料。会议在一片和气中结束。', en: 'You present a new proposal. Colleagues say “looks good” one after another; only your boss stays silent, flipping through papers. The meeting ends pleasantly.' },
+    timeline: [
+      ['同事A', '“挺好的，思路很清晰。”', '语速很快，没有追问细节'],
+      ['同事B', '“可以的，我没意见。”', '看了老板一眼才说'],
+      ['老板', '（翻到第三页停了一下，没有抬头）', '全程没有提问'],
+      ['老板', '“行，今天先到这里。”', '合上材料，没有看你']
+    ],
+    prompt: '你觉得这个方案现在的真实处境是什么？你接下来做什么？',
+    signals: [
+      { id: 'r1s1', type: 'wording', layer: 'subtext', beat: 0, text: '“挺好的”没有任何具体点：泛泛的肯定常常是“不想表态”，而不是真认可。真感兴趣的人会问问题。' },
+      { id: 'r1s2', type: 'alliance', layer: 'power', beat: 1, text: '看了老板一眼才说：B 的表态在等老板的风向，他的“没意见”不代表他自己的判断。' },
+      { id: 'r1s3', type: 'timing', layer: 'subtext', beat: 2, text: '老板在第三页停住：那里很可能有他在意的点。停顿是此刻最有信息量的信号。' },
+      { id: 'r1s4', type: 'unsaid', layer: 'power', beat: 3, text: '“先到这里”+不看你：决定被推迟到会议之外，真正的反馈会在私下发生。' },
+      { id: 'r1s5', type: 'power', layer: 'relation', beat: 2, text: '全场的和气，部分来自“老板没说话时没人敢先挑毛病”，不是方案没有问题。' }
+    ],
+    veteran: [
+      { say: { zh: '（会后单独找老板）“今天会上您翻到第三页停了一下，那部分我担心是不是有哪里没说清楚？想听听您最直接的意见。”', en: '(afterwards, privately) “You paused on page three — is something unclear there? I’d love your most direct view.”' }, mech: ['probe', 'curious'], why: '把一个具体的观察（停在第三页）变成邀请，让老板更容易说出顾虑；你验证的是假设，而不是追问态度。', limits: '不要暗示“你一直没说话”，那会让对方觉得被点名。', delivery: '私下、简短、时间选在老板比较空的时候，语气好奇而不是焦虑。' },
+      { say: { zh: '（私下问同事 B）“你觉得老板对这个方向的顾虑可能在哪？我想提前补上。”', en: '(to colleague B) “Where do you think the boss has reservations? I’d like to fill that in early.”' }, mech: ['probe', 'askBack'], why: '用一个不需要对方“站队”的问题收集信息，把“谁支持我”变成“风险在哪”。', limits: '不要追问同事“你到底是不是真的同意”，那会让人防御。', delivery: '随口、合作的语气，避免像在查岗。' },
+      { say: { zh: '（会后发给老板一页纸）“补充了三点可能的风险和备选方案，您看哪块需要我细化？”', en: '(a one-pager) “I added three possible risks and fallbacks — which part should I flesh out?”' }, mech: ['delay', 'redirect'], why: '不等对方表态，主动把顾虑摆到桌面上，既显示成熟，也给了老板一个低成本回应的入口。', limits: '内容要有真实的风险分析，不能是形式。', delivery: '简洁、不卑微。' }
+    ],
+    pitfalls: [
+      { say: '（当天追着老板问）“您觉得怎么样？是不是有问题？”', cost: '在没有准备的时候逼对方表态，容易换来一句“再看看”，也暴露了你的不安。' },
+      { say: '（相信大家的“挺好的”，直接开始执行）', cost: '把礼貌性的肯定当作授权，之后可能在更高的成本处被否决。' }
+    ]
+  });
+
+  S({ id: 'r2', domain: 'read', topic: 'read', dims: { parties: 5, subtext: 3, power: 2, heat: 2 },
+    title: { zh: '项目群里谁和谁一伙', en: 'Who is aligned with whom in the project chat' },
+    setup: { zh: '你在项目群里提了一个分工调整建议。接下来的十分钟里，发生了一些事——你想弄清楚群里的真实格局。', en: 'You propose a task reallocation in the project chat. Over the next ten minutes things happen — you want to understand the real alignment in the group.' },
+    timeline: [
+      ['你', '“我建议把接口联调提前到周三，大家看看？”', '17:02'],
+      ['小周', '“收到。”', '17:03，两秒内回复，没有表情'],
+      ['小李', '（给小周下一条消息点了赞，没有回应你）', '17:05'],
+      ['小周', '“@小李 周四那个你能先看下吗？”', '17:06，绕开了你的提议'],
+      ['小李', '“可以，我周四先弄。”', '17:06，和小周很快对上了节奏']
+    ],
+    prompt: '这个群里谁在影响谁？你下一步怎么做？',
+    signals: [
+      { id: 'r2s1', type: 'timing', layer: 'relation', beat: 1, text: '两秒回“收到”：很快，但没有内容。“收到”是确认看见，不是同意。' },
+      { id: 'r2s2', type: 'alliance', layer: 'relation', beat: 2, text: '小李给小周点赞、不回你：他在回应对他有意义的人，你的提议被无声地搁置。' },
+      { id: 'r2s3', type: 'alliance', layer: 'power', beat: 3, text: '小周直接 @小李 另安排周四：他们在绕开你的提议，形成了自己的节奏。' },
+      { id: 'r2s4', type: 'timing', layer: 'subtext', beat: 4, text: '两人几乎同时对上：很可能他们在群外已经沟通过，群里只是确认。' },
+      { id: 'r2s5', type: 'unsaid', layer: 'subtext', beat: 3, text: '没有人反对你，也没有人支持你。沉默的反对往往比公开的反对更难应对。' }
+    ],
+    veteran: [
+      { say: { zh: '（私聊小周）“刚看到你和小李在排周四，我的提议可能和你们的节奏冲突了。你们这边实际卡在哪？我想把联调时间放在对你们合适的位置。”', en: '(DM to Zhou) “Looks like my suggestion clashed with your plan for Thursday. What’s the real constraint? I’d like to place the integration where it works for you.”' }, mech: ['probe', 'saveFace'], why: '不指责“绕开我”，而是承认可能的冲突，直接去拿真实约束，把格局问题变成排期问题。', limits: '对方如果真的在刻意孤立你，这样的私聊可能得不到真话——需要更多观察。', delivery: '私聊、语气平稳，不带情绪词。' },
+      { say: { zh: '（群里）“我整理了周三/周四两种联调方案的优缺点，大家选一个更不影响各自进度的就行。”', en: '(in the chat) “Here are pros and cons of integrating Wed vs Thu — pick whatever least disrupts your work.”' }, mech: ['redirect', 'partial'], why: '用结构化的选项代替“我的提议”，降低被个人否决的可能，也让沉默的人更容易表态。', limits: '选项要真实，不能是假选择。', delivery: '简洁、客观，不要夹带情绪。' },
+      { say: { zh: '（先观察一两天，留意谁的消息总被先回复、谁常被@）', en: '(watch for a day or two: whose messages get answered first, who gets @-ed)' }, mech: ['slow', 'probe'], why: '一次互动不足以判断格局。多看几次，再区分“个人习惯”和“稳定的联盟”。', limits: '观察期不要变成消极回避，该推进的事仍要推进。', delivery: '保持日常的友好互动，不要突然改变态度。' }
+    ],
+    pitfalls: [{ say: '（在群里）“看来你们已经商量好了？那我的建议是不是没必要提了。”', cost: '公开说出你的猜测，会让对方防御，也把一个排期问题变成了站队冲突。' }]
+  });
+
+  S({ id: 'r3', domain: 'read', topic: 'read', dims: { parties: 2, subtext: 3, power: 1, heat: 1 },
+    title: { zh: '“改天约”是客套还是真邀请', en: '“Let’s meet sometime” — polite or real?' },
+    setup: { zh: '你刚认识的一位行业前辈在活动结束时说：“今天聊得很开心，改天约！”你想知道这到底是客套，还是值得跟进的真邀请。', en: 'An industry senior you just met says at the end of the event: “Great chat — let’s meet sometime!” Is it politeness or a real invitation?' },
+    timeline: [
+      ['前辈', '“今天聊得很开心，改天约！”', '边说边看了看时间'],
+      ['前辈', '“我们加个微信吧。”', '主动拿出了手机'],
+      ['你', '（加完微信，他点了个“好友请求已通过”）', ''],
+      ['前辈', '（三天后你发了一条消息，他回了一个“👍”）', '没有后续问题']
+    ],
+    prompt: '这是真邀请吗？你怎么判断，怎么跟进？',
+    signals: [
+      { id: 'r3s1', type: 'wording', layer: 'subtext', beat: 0, text: '“改天”没有具体时间或事项：真邀请会带一个具体的钩子（时间、话题、地点）。' },
+      { id: 'r3s2', type: 'body', layer: 'tone', beat: 0, text: '边说边看时间：他在收尾，这句话更像礼貌的告别语，而不是计划。' },
+      { id: 'r3s3', type: 'body', layer: 'relation', beat: 1, text: '主动掏手机加微信：这是真实的行动，比“改天约”更有分量——他愿意保持连接，只是不一定愿意投入时间。' },
+      { id: 'r3s4', type: 'wording', layer: 'subtext', beat: 3, text: '只回“👍”、没有问题：对方愿意维持礼貌，但没有打开对话的意愿。' }
+    ],
+    veteran: [
+      { say: { zh: '“今天聊到的那个供应链话题我还想请教，下周您方便的话，我请您喝杯咖啡聊 20 分钟？时间地点您定。”', en: '“I’d love to continue on the supply-chain topic. Could I buy you a coffee for 20 minutes next week? You choose time and place.”' }, mech: ['probe', 'saveFace'], why: '用具体的、低成本的、容易拒绝的邀请来验证对方的意愿：他答应，是真的；他婉拒，也有体面的退路。', limits: '被婉拒后不要追问，换成偶尔分享有价值的信息来保持连接。', delivery: '简短、不卑微，把选择权给对方。' },
+      { say: { zh: '（先发一条有价值的信息）“看到一篇跟您聊的方向很相关的文章，分享给您，不用回复。”', en: '(first send something of value) “Saw an article related to what you mentioned — no need to reply.”' }, mech: ['probe', 'slow'], why: '先给一点价值、不要求回应，既保持连接，也从对方的反应里读到他的兴趣。', limits: '不要高频发送，避免变成打扰。', delivery: '很短，不带期待。' }
+    ],
+    pitfalls: [
+      { say: '“那您这周哪天有空？周二周三周五我都可以！”', cost: '把一句客套当作承诺逼对方给时间，给对方造成压力，也容易被礼貌地拒绝。' },
+      { say: '（相信了“改天约”，一直等他来联系）', cost: '把主动权完全交出去，通常没有下文，也无从验证对方的真实意图。' }
+    ]
+  });
+
+  S({ id: 'r4', domain: 'read', topic: 'read', dims: { parties: 6, subtext: 3, power: 3, heat: 2 },
+    title: { zh: '谈判桌上的三个声音', en: 'Three voices at the negotiating table' },
+    setup: { zh: '你在向客户方做报价沟通。对方来了三个人：采购经理、业务负责人和一位很少说话的资深顾问。会议末尾对方说：“我们内部再讨论一下。”', en: 'You present a quote to a client team: a procurement manager, a business lead and a quiet senior advisor. At the end they say: “We’ll discuss internally.”' },
+    timeline: [
+      ['采购经理', '“你们的价格比另一家高了不少。”', '语速快，一直在看报价表'],
+      ['业务负责人', '“功能方面我们是挺满意的。”', '微笑，看向顾问'],
+      ['顾问', '（全程没有开口，在笔记本上写了几行字，听到“交付周期”时抬了头）', ''],
+      ['业务负责人', '“交付周期这块，我们还是要再确认一下。”', '看了顾问一眼'],
+      ['采购经理', '“我们内部再讨论一下，回头给你们答复。”', '合上本子']
+    ],
+    prompt: '这三个人各自的立场是什么？谁真正决定？你怎么推进？',
+    signals: [
+      { id: 'r4s1', type: 'wording', layer: 'power', beat: 0, text: '价格是采购的指标：采购压价是职责所在，不一定代表项目不通过。' },
+      { id: 'r4s2', type: 'alliance', layer: 'relation', beat: 1, text: '业务负责人满意功能，并看向顾问：他是你的潜在盟友，但他在等顾问的判断。' },
+      { id: 'r4s3', type: 'power', layer: 'power', beat: 2, text: '顾问全程沉默却在记录，只对“交付周期”有反应：他很可能是关键的评估者，他的顾虑在交付风险上。' },
+      { id: 'r4s4', type: 'timing', layer: 'subtext', beat: 3, text: '业务负责人再次提到交付周期，同时看向顾问：这是在替顾问发声。' },
+      { id: 'r4s5', type: 'unsaid', layer: 'subtext', beat: 4, text: '“内部再讨论”：可能是礼貌的拒绝，也可能是真要内部协调。要靠后续的行动来区分。' }
+    ],
+    veteran: [
+      { say: { zh: '（会后向业务负责人）“刚才交付周期看起来是大家比较关心的点。方便的话，能不能约顾问老师单独聊 15 分钟，我把我们的交付保障方案讲清楚？”', en: '(to the business lead) “Delivery timing seems to matter. Could we have 15 minutes with the advisor to walk through our delivery assurance plan?”' }, mech: ['probe', 'redirect'], why: '把“内部再讨论”转化为一个具体的小请求，直接接触真正的评估者，针对他的顾虑给方案。', limits: '不要绕过采购经理做事，应征得业务负责人同意并同步给采购。', delivery: '尊重、清楚，强调这是为了让他们的讨论更有信息。' },
+      { say: { zh: '（给采购经理）“价格上我们理解您的压力。我整理了一版按交付阶段付款的方案，可以降低您一次性投入的风险，供内部讨论参考。”', en: '(to procurement) “We understand the price pressure. Here is a milestone-based payment plan to lower upfront risk for your internal discussion.”' }, mech: ['partial', 'redirect'], why: '承认压价的合理性，同时给采购一个能向内部交代的“可用材料”，而不是继续在价格上拉扯。', limits: '方案要真实可执行，不要为了成交承诺做不到的事。', delivery: '专业、合作，不带防御。' },
+      { say: { zh: '（三天后发一条）“想确认一下内部讨论的节点：如果有需要补充的材料，我们可以在周五前准备好。”', en: '(three days later) “Just checking on the internal timeline — if you need more material, we can prepare it by Friday.”' }, mech: ['delay', 'probe'], why: '用“补充材料”这个小口子保持推进，同时从回复速度和具体程度读到对方的真实意愿。', limits: '不要连续追问；一次跟进后根据反应调整。', delivery: '简短，不施压。' }
+    ],
+    pitfalls: [{ say: '“价格上我们可以再让一点，您看能不能今天就定下来？”', cost: '没有搞清真实的顾虑就让价，会削弱自己的立场，也解决不了顾问的交付疑虑。' }]
+  });
+
+  S({ id: 'r5', domain: 'read', topic: 'read', dims: { parties: 2, subtext: 3, power: 1, heat: 3 },
+    title: { zh: '同事突然变冷淡', en: 'A colleague suddenly turns cold' },
+    setup: { zh: '一周前你和同事小陈还会一起吃午饭、互相吐槽。这周起，他的回复变得很短，开会时也很少看你。你感到一点不安。', en: 'A week ago you and Chen had lunch together and joked around. This week his replies are short and he rarely looks at you in meetings. You feel uneasy.' },
+    timeline: [
+      ['小陈', '“好。”', '以前会回一大段加表情'],
+      ['小陈', '（午饭时说“我带了饭，在工位吃”）', '这是本周第三次'],
+      ['小陈', '（会上你发言时，他在看手机）', ''],
+      ['小陈', '（走廊遇见，点点头就走了）', '但他和别的同事还在说笑']
+    ],
+    prompt: '这意味着什么？你在做任何反应前，会先怎么确认？',
+    signals: [
+      { id: 'r5s1', type: 'wording', layer: 'tone', beat: 0, text: '回复变短：和他“以前”的基线相比的变化，比单次内容更重要。' },
+      { id: 'r5s2', type: 'timing', layer: 'relation', beat: 1, text: '连续三次避开共同午饭：不是偶然，但原因未知——可能是对你，也可能是他自己的状态。' },
+      { id: 'r5s3', type: 'body', layer: 'tone', beat: 2, text: '会上看手机：可能是回避、也可能是他在处理自己的压力。单个行为不足以判断。' },
+      { id: 'r5s4', type: 'audience', layer: 'relation', beat: 3, text: '和别的同事还在说笑：说明他不是整体情绪低落，变化更像是针对你或与你相关的事。' },
+      { id: 'r5s5', type: 'heat', layer: 'subtext', beat: 0, text: '你自己的不安会放大“被针对”的解释。先把几种可能列出来，不要只接受最痛的那一种。' }
+    ],
+    veteran: [
+      { say: { zh: '“最近感觉你有点忙，也可能是我哪里做得不对？如果有的话直接告诉我，我想把事情弄清楚。”', en: '“You seem busy lately — or did I do something off? If so, tell me directly; I’d like to clear it up.”' }, mech: ['probe', 'curious'], why: '同时承认“你忙”和“我可能有问题”两种假设，让对方可以选择更安全的那个来回答，而不是被逼问。', limits: '不要在公开场合问；对方说“没事”时不要追问第二次。', delivery: '私下、轻松、不带情绪压力，给对方留退路。' },
+      { say: { zh: '（先写下三种可能：他自己有压力 / 我的某件事让他不舒服 / 他和别人有事影响了关系；然后观察一周）', en: '(write down three hypotheses first; observe for a week)' }, mech: ['slow', 'probe'], why: '把一个情绪反应变成几个可验证的假设，降低你被“最坏的那一种”带走的概率。', limits: '观察不等于回避；若影响到工作协作，需要主动沟通。', delivery: '继续保持正常、友好的互动，不要突然变冷淡。' },
+      { say: { zh: '（小事上轻轻试探）“周五我想去楼下新开的那家，你有空一起吗？没空也没关系。”', en: '(a small probe) “I’m trying the new place downstairs on Friday — want to join? No worries if not.”' }, mech: ['probe', 'saveFace'], why: '用一个低成本、容易拒绝的邀请，从他的反应（语气、是否给理由）里校准判断。', limits: '被拒绝一次不代表什么；不要连续邀请。', delivery: '随意、轻松。' }
+    ],
+    pitfalls: [
+      { say: '（也变冷淡，对他同样简短回复）', cost: '用冷淡回应冷淡，会把一个可能的误会变成稳定的对立，而你甚至还不知道原因。' },
+      { say: '（在群里或当众）“小陈你最近是不是对我有意见？”', cost: '当众质问让对方被迫表态，通常得到的是防御而不是真话。' }
+    ]
+  });
+
+  S({ id: 'r6', domain: 'read', topic: 'read', dims: { parties: 6, subtext: 3, power: 3, heat: 3 },
+    title: { zh: '家庭聚餐上的暗线', en: 'The undercurrents at a family dinner' },
+    setup: { zh: '春节家庭聚餐，七八个亲戚围坐一桌。几位长辈聊起你堂哥刚买的房子，话题一点点拐向你——桌下，你妈轻轻碰了你的脚。', en: 'At a family dinner with a table of relatives, elders praise your cousin’s new flat and the topic slowly turns toward you — under the table your mother taps your foot.' },
+    timeline: [
+      ['三姑', '“你堂哥这次买的那套，地段真不错啊。”', '看了你一眼'],
+      ['二叔', '“年轻人还是要早点安顿下来，对吧？”', '声音不大，但全桌都听得见'],
+      ['妈妈', '（在桌下碰了碰你的脚）', '脸上还带着笑，没有看你'],
+      ['堂哥', '“我也就是运气好，其实压力也大。”', '看向你，微微耸肩'],
+      ['三姑', '“你呢？有什么打算？”', '全桌静了一下']
+    ],
+    prompt: '这场对话里各方在做什么？你怎么回应才对自己、对妈妈、对大家都比较体面？',
+    signals: [
+      { id: 'r6s1', type: 'face', layer: 'relation', beat: 0, text: '称赞堂哥的同时看你一眼：赞美里含有比较，话题正在铺垫。' },
+      { id: 'r6s2', type: 'audience', layer: 'power', beat: 1, text: '二叔的“对吧？”：把个人问题变成大家的共识，让你不好反驳。' },
+      { id: 'r6s3', type: 'body', layer: 'relation', beat: 2, text: '妈妈桌下碰脚：她在提醒你“小心/别硬碰”，也是在紧张——她担心你被评价，也担心场面。' },
+      { id: 'r6s4', type: 'alliance', layer: 'relation', beat: 3, text: '堂哥的耸肩：他在向你示好、撇清“比较”，可能是潜在的盟友。' },
+      { id: 'r6s5', type: 'timing', layer: 'subtext', beat: 4, text: '全桌静下来：这是一个被设计的“该你说了”的时刻，你的回应会被各方解读。' }
+    ],
+    veteran: [
+      { say: { zh: '“我现在先把手头的事做扎实，等有了结果第一个跟三姑汇报。倒是堂哥，你得传授点买房的经验，我们都想听。”', en: '“I’m focusing on getting things right now and will report to you first when there’s news. Cousin, you should share your home-buying tips — we all want to hear.”' }, mech: ['boundary', 'saveFace', 'redirect'], why: '给长辈一个体面的交代，同时承接堂哥的示好，把焦点引回对方，不对抗也不透露细节。', limits: '语气不要敷衍；如果长辈继续追问，需要重复一次边界，再换话题。', delivery: '微笑、语速放缓，说完看向堂哥，自然地把话题交出去。' },
+      { say: { zh: '（用玩笑承接）“三姑这是要给我下任务啊！我记下了，今年的 KPI 就这么定了。”', en: '(with humor) “Auntie is assigning me a target! Noted — that’s this year’s KPI.”' }, mech: ['humor', 'partial'], why: '用玩笑接住期待，不接受压力的框架，也让桌上的气氛放松。', limits: '对非常较真的长辈需要配合一句更认真的话。', delivery: '轻松、带笑。' },
+      { say: { zh: '（私下对妈妈）“刚才你碰我，我懂你的意思。下次我们可以先说好，被问到这类问题，你希望我怎么回答？”', en: '(privately to Mom) “I got what you meant by the tap. Next time, how would you like me to handle those questions?”' }, mech: ['probe', 'nameFact'], why: '把无声的暗号变成可沟通的约定，减少下一次的猜测与紧张。', limits: '时间选在饭后、不被打扰的时候，不要当场争论。', delivery: '温和、合作，不带“你为什么总这样”的指责。' }
+    ],
+    pitfalls: [{ say: '“你们能不能别总拿我跟堂哥比？我怎么过是我自己的事！”', cost: '直接顶回去会让一桌人下不来台，妈妈也被置于尴尬的位置，你的态度反而成了话题。' }]
+  });
+
+  /* ================= 日常 / 亲密（补充） ================= */
+  S({ id: 'c1', domain: 'close', topic: 'intimacy', dims: { parties: 2, subtext: 2, power: 1, heat: 2 },
+    title: { zh: '爽约之后又来借钱的朋友', en: 'A friend who flaked, then asks to borrow money' },
+    setup: { zh: '好友小林这两个月爽约了你们三次约好的聚会，今天突然发消息：“最近手头有点紧，能借我 3000 吗？下个月还。”', en: 'Your friend Lin has flaked on three plans in two months. Today they text: “Money’s a bit tight, could I borrow 3000? I’ll repay next month.”' },
+    timeline: [
+      ['小林', '“最近手头有点紧，能借我 3000 吗？”', '晚上 10:20'],
+      ['小林', '“下个月一发工资就还你。”', '1 分钟后追加'],
+      ['小林', '“不方便也没事，我再想想别的办法。”', '语气变轻']
+    ],
+    prompt: '你怎么回应？',
+    signals: [
+      { id: 'c1s1', type: 'timing', layer: 'subtext', beat: 0, text: '深夜发来、先说借钱：对方在犹豫很久后才开口，说明这件事对他不轻松。' },
+      { id: 'c1s2', type: 'wording', layer: 'subtext', beat: 1, text: '很快补上“下个月还”：他在预判你的顾虑，也说明他知道自己之前的行为不太让人放心。' },
+      { id: 'c1s3', type: 'wording', layer: 'relation', beat: 2, text: '“不方便也没事”：给你留了退路，但也可能含着“我其实很需要”。' },
+      { id: 'c1s4', type: 'unsaid', layer: 'subtext', beat: 0, text: '没有提到爽约、也没有说原因：你看不到他最近发生了什么，借钱背后的情况不明。' }
+    ],
+    veteran: [
+      { say: { zh: '“谢谢你信任我开口。我先问一下：是遇到什么急事了吗？我想知道你现在的情况，再看我能怎么帮。”', en: '“Thanks for trusting me. What’s going on? I want to understand before I see how I can help.”' }, mech: ['curious', 'probe'], why: '先接住他的信任，再用关心的问题获取真实情况，而不是直接审问或直接答应。', limits: '如果对方不愿说，可以尊重，但这也会影响你的决定。', delivery: '温和、真诚，不带审判。' },
+      { say: { zh: '“3000 我这边不太方便，但我可以借你 1000，不用着急还。我们先把你最紧的这块解决，好吗？”', en: '“3000 is too much for me, but I can lend 1000, no rush to repay. Let’s cover the tightest part first.”' }, mech: ['boundary', 'saveFace'], why: '用自己能承受的额度设边界，同时表达支持。清楚的数字比含糊的“再说吧”更尊重对方。', limits: '只借你真的能承受“收不回来”的数额。', delivery: '平静、直接，不要附加说教。' },
+      { say: { zh: '“这次借不了，是我自己最近也紧。但上次几次约好没来我有点在意，等你缓过来我们好好聊聊，可以吗？”', en: '“I can’t this time — I’m tight too. I also felt a bit hurt about the missed plans; let’s talk when you’re okay.”' }, mech: ['boundary', 'nameFact'], why: '拒绝时诚实地提出一直没说的在意，但选在对方“缓过来”之后，避免在他求助时说教。', limits: '要真的约时间聊，否则会变成含糊的抱怨。', delivery: '真诚、不带指责。' }
+    ],
+    pitfalls: [
+      { say: '“你之前放了我三次鸽子，现在好意思找我借钱？”', cost: '把旧账和借钱绑在一起，会让对方羞耻、关系受损，而你也没有解决真正的问题。' },
+      { say: '（因为不好意思拒绝，直接转账 3000）', cost: '违背自己意愿的答应会在之后变成怨气，也可能让对方不再认真对待承诺。' }
+    ]
+  });
+
+  S({ id: 'c2', domain: 'close', topic: 'intimacy', dims: { parties: 2, subtext: 2, power: 1, heat: 2 },
+    title: { zh: '加班后的伴侣', en: 'Your partner after a long overtime night' },
+    setup: { zh: '伴侣连续加班一周，今晚十一点回到家。你特意做了夜宵，他看了一眼说：“我吃过了，你别弄了。”然后径直去了卧室。', en: 'Your partner has worked overtime all week and gets home at 11pm. You made a late meal; they glance at it: “I ate already, don’t bother.” Then head to the bedroom.' },
+    timeline: [
+      ['伴侣', '“我吃过了，你别弄了。”', '语气很平，没有看你'],
+      ['伴侣', '（换衣服时把手机扔在床上）', '动作有点重'],
+      ['伴侣', '“我有点累，先睡了。”', '背对着你躺下']
+    ],
+    prompt: '你怎么回应？',
+    signals: [
+      { id: 'c2s1', type: 'tone', layer: 'tone', beat: 0, text: '语气平、不看你：不是针对你，更像是电量耗尽。' },
+      { id: 'c2s2', type: 'body', layer: 'tone', beat: 1, text: '动作重：身体里还有没处理完的压力或烦躁。' },
+      { id: 'c2s3', type: 'wording', layer: 'subtext', beat: 0, text: '“你别弄了”：既是不想麻烦你，也可能带着愧疚——他没法回应你的好意。' },
+      { id: 'c2s4', type: 'unsaid', layer: 'subtext', beat: 2, text: '背对躺下：此刻他需要的可能是安静，而不是被安慰或被追问。' }
+    ],
+    veteran: [
+      { say: { zh: '“好，那夜宵我放冰箱，你明天想吃再热。你先好好睡，辛苦了。”', en: '“Okay, I’ll put it in the fridge for tomorrow. Sleep well — you’ve earned it.”' }, mech: ['slow', 'saveFace'], why: '不追问、不撤回善意，只给他一个轻松的出口，同时确认“我看到你辛苦了”。', limits: '如果他连续多天这样，需要在他状态好时再聊。', delivery: '轻柔、简短，不带情绪。' },
+      { say: { zh: '（在他躺下后）“周末想不想什么都不安排？我来搞定，你只管睡到自然醒。”', en: '(after he lies down) “This weekend, want nothing planned? I’ll handle it — you just sleep in.”' }, mech: ['redirect', 'saveFace'], why: '把当下无法解决的疲惫，转成可期待的恢复计划，让他感到被照顾而不是被要求。', limits: '要真的兑现，否则会变成空头承诺。', delivery: '小声，不需要他回答。' }
+    ],
+    pitfalls: [
+      { say: '“我特意给你做的，你就这样？我也很累啊。”', cost: '在他最没力气的时候讨要认可，会把疲惫变成愧疚和对立。' },
+      { say: '“你怎么了？是不是我做错了什么？你说话呀。”', cost: '追问会逼他在没有力气时解释，也把他的疲惫个人化为“跟你有关”。' }
+    ]
+  });
+
+  S({ id: 'c3', domain: 'close', topic: 'intimacy', dims: { parties: 2, subtext: 3, power: 1, heat: 2 },
+    title: { zh: '好友忽然疏远', en: 'A close friend drifts away' },
+    setup: { zh: '你和好友阿雯以前几乎每天聊天。最近她很少回你消息，朋友圈里却常和另一个圈子的人出去玩。你发了一条消息，她三天后才回。', en: 'You and Wen used to chat daily. Lately she rarely replies, yet she posts outings with another group. She answers your message three days later.' },
+    timeline: [
+      ['你', '“周末要不要一起去那家新开的咖啡店？”', '周一晚上'],
+      ['阿雯', '“哎呀最近好忙！下次吧～”', '周四中午，带了一个笑脸'],
+      ['阿雯', '（周六发了和别人聚会的照片）', '配文：好开心'],
+      ['阿雯', '（你的生日，她发了一条“生日快乐”和一个红包）', '没有多说什么']
+    ],
+    prompt: '怎么看待这件事？你会怎么做？',
+    signals: [
+      { id: 'c3s1', type: 'timing', layer: 'relation', beat: 1, text: '三天后才回：优先级的变化是真实的，但原因未知。' },
+      { id: 'c3s2', type: 'wording', layer: 'subtext', beat: 1, text: '“下次吧～”没有给出新的时间：礼貌的推迟，不是约定。' },
+      { id: 'c3s3', type: 'unsaid', layer: 'subtext', beat: 2, text: '她有精力见别人：忙是真的，但“忙”不等于“没有精力给你”，需要另外理解。' },
+      { id: 'c3s4', type: 'wording', layer: 'relation', beat: 3, text: '生日仍记得并有表示：关系没有断，只是在变化。很多友情会因生活阶段不同而改变距离。' },
+      { id: 'c3s5', type: 'heat', layer: 'subtext', beat: 2, text: '看到她和别人聚会的刺痛是真的；先承认这份感受，再决定要不要把它当作“被抛弃”的证据。' }
+    ],
+    veteran: [
+      { say: { zh: '“最近感觉我们联系少了，我有点想你。你是不是最近状态有点特别？没事，我只是想让你知道我还在。”', en: '“We’ve been in touch less and I miss you. Is something going on? No pressure — I just want you to know I’m here.”' }, mech: ['nameFact', 'probe'], why: '说出自己的感受和观察（联系少了），不指责，同时留出对方说真话的空间。', limits: '不要同时问“你是不是不想理我了”，那是逼对方证明。', delivery: '私下、温暖、不带委屈的语气。' },
+      { say: { zh: '（给一个小而具体的邀请）“下周三晚上我要去散步，你想一起走半小时吗？不想也没关系。”', en: '(a small invitation) “I’m taking a walk Wednesday evening — join me for half an hour? No pressure.”' }, mech: ['probe', 'saveFace'], why: '用低成本的约定替代“大聚会”，更容易被接受，也能从她的回应里读到她的状态。', limits: '被婉拒后保持耐心，不要立刻理解为拒绝。', delivery: '轻松。' },
+      { say: { zh: '（先暂时放一放，把一部分注意力放回自己的其他关系和生活）', en: '(let it rest for a while and invest in your other relationships)' }, mech: ['slow'], why: '友情的距离会有周期。你不必每次都靠追问来确认它，保持开放比紧抓更有利于关系的恢复。', limits: '放一放不是冷战，遇到她的重要时刻仍要出现。', delivery: '平和。' }
+    ],
+    pitfalls: [
+      { say: '“我看你朋友圈天天出去玩，原来你不是忙，只是不想见我。”', cost: '用朋友圈当证据指控，会让对方防御、羞耻，往往把一次疏远变成真正的决裂。' }
+    ]
+  });
+})();

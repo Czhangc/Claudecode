@@ -102,15 +102,20 @@
   /* ---------- 场景库 ---------- */
   const filt = { domain: '', topic: '', cx: '' };
   routes.library = function () {
-    const list = window.SCENARIOS.filter((s) => (!filt.domain || s.domain === filt.domain) && (!filt.topic || s.topic === filt.topic) && (!filt.cx || String(complexity(s)) === filt.cx));
-    const sel = (id, opts, cur) => `<select id="f-${id}"><option value="">${L('全部', 'All')}</option>${opts.map(([v, n]) => `<option value="${v}" ${cur === v ? 'selected' : ''}>${esc(n)}</option>`).join('')}</select>`;
-    return `<section><h1>${L('场景库', 'Scenario library')}</h1>
+    const all = window.SCENARIOS;
+    const list = all.filter((s) => (!filt.domain || s.domain === filt.domain) && (!filt.topic || s.topic === filt.topic) && (!filt.cx || String(complexity(s)) === filt.cx));
+    const cnt = (fn) => all.filter(fn).length;
+    const sel = (id, opts, cur) => `<select id="f-${id}"><option value="">${L('全部', 'All')}</option>${opts.map(([v, n, c]) => `<option value="${v}" ${cur === v ? 'selected' : ''}>${esc(n)} (${c})</option>`).join('')}</select>`;
+    const active = filt.domain || filt.topic || filt.cx;
+    const empty = `<div class="panel"><p class="muted">${L('当前筛选条件下没有场景。', 'No scenarios match these filters.')}</p><button class="btn small" id="clearFilt">${L('清除筛选', 'Clear filters')}</button></div>`;
+    return `<section><h1>${L('场景库', 'Scenario library')} <span class="muted">${list.length}/${all.length}</span></h1>
       <p class="lead">${L('难度完全自选，没有解锁门槛。复杂度 = 人数 + 潜台词 + 权力差 + 情绪温度。', 'Pick any difficulty — nothing is locked. Complexity = parties + subtext + power gap + emotional heat.')}</p>
-      <div class="filters">${sel('domain', Object.keys(TAX.domains).map((k) => [k, t(TAX.domains[k])]), filt.domain)}${sel('topic', Object.keys(TAX.topics).map((k) => [k, t(TAX.topics[k])]), filt.topic)}${sel('cx', [['1', cxLabel(1)], ['2', cxLabel(2)], ['3', cxLabel(3)]], filt.cx)}</div>
-      <div class="grid">${list.map(card).join('') || `<p class="muted">${L('没有符合的场景', 'No matching scenarios')}</p>`}</div></section>`;
+      <div class="filters">${sel('domain', Object.keys(TAX.domains).map((k) => [k, t(TAX.domains[k]), cnt((s) => s.domain === k)]), filt.domain)}${sel('topic', Object.keys(TAX.topics).map((k) => [k, t(TAX.topics[k]), cnt((s) => s.topic === k)]), filt.topic)}${sel('cx', [1, 2, 3].map((n) => [String(n), cxLabel(n), cnt((s) => complexity(s) === n)]), filt.cx)}${active ? `<button class="btn small ghost" id="clearFilt2">${L('清除', 'Clear')}</button>` : ''}</div>
+      <div class="grid">${list.map(card).join('') || ''}</div>${list.length ? '' : empty}</section>`;
   };
   routes['library:bind'] = function () {
     ['domain', 'topic', 'cx'].forEach((k) => { const el = $('#f-' + k); if (el) el.onchange = () => { filt[k] = el.value; SG.rerender(); }; });
+    ['#clearFilt', '#clearFilt2'].forEach((id) => { const b = $(id); if (b) b.onclick = () => { filt.domain = filt.topic = filt.cx = ''; SG.rerender(); }; });
   };
 
   /* ---------- 模式镜 ---------- */

@@ -33,7 +33,7 @@ a{color:var(--accent2)}
 input,textarea,select{width:100%;padding:9px 10px;margin:4px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
 label{display:block;font-size:14px;color:var(--mute)}
 .chk{display:flex;align-items:center;gap:8px;color:var(--ink)}.chk input{width:auto;margin:0}
-.filters select{width:auto;margin:0 0 8px}
+.filters select{width:auto;max-width:100%;margin:0 0 8px}.filters .btn.small{margin:0 0 8px}
 .steps{display:flex;gap:6px;list-style:none;padding:0;margin:12px 0;font-size:13px;flex-wrap:wrap}
 .steps li{padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--mute)}
 .steps li.on{background:var(--accent);color:#fff}.steps li.done{color:var(--accent2)}

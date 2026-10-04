@@ -1,5 +1,5 @@
 // Service worker：app-shell 缓存，离线可用。CACHE 版本号由 build.js 注入。
-const CACHE = 'social-gym-2a1341eb35';
+const CACHE = 'social-gym-e51c981d8b';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => {

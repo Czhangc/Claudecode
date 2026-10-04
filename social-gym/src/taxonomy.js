@@ -11,7 +11,8 @@ window.TAX = {
     provoke: { zh: '应对挑衅/贬低', en: 'Handling provocation' },
     power:   { zh: '权力与面子', en: 'Power & face' },
     intimacy:{ zh: '亲密关系', en: 'Intimacy' },
-    event:   { zh: '大场合', en: 'Social events' }
+    event:   { zh: '大场合', en: 'Social events' },
+    read:    { zh: '读懂局面', en: 'Reading the room' }
   },
   layers: {
     tone:     { zh: '语气层', en: 'Tone' },
@@ -65,6 +66,8 @@ window.TAX = {
                 def: '“我想一下，稍后回你。”把即时反应变成设计后的回应。' },
     askBack:  { zh: '以问代答', en: 'Answer with a question',
                 def: '用问题化解陷阱问题，同时获取信息，例：“你为什么这么问？”' },
+    probe:    { zh: '低成本验证假设', en: 'Cheap probe of a hypothesis',
+                def: '不急着下结论或行动：先列出几种可能的解释，再用一个小问题或小动作试探，用对方的反应来校正判断。例：“我想确认一下，这周的节奏你是不是有点吃紧？”' },
     partial:  { zh: '有限同意', en: 'Acknowledge, not concede',
                 def: '承认对方话里站得住的部分，但不接受整体框架：“这点你说得对，不过……”' }
   }
