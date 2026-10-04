@@ -6,6 +6,14 @@
 ## 使用
 双击 `index.html` 即可（它是单文件，内联了全部脚本和样式，也可直接放到任意静态托管）。源码在 `src/`，改完运行 `node build.js` 重新生成 `index.html`。数据只存在本机浏览器的 localStorage；可在「设置」里导出/导入 JSON。
 
+## 手机安装（PWA）
+1. **开启托管**：GitHub 仓库 → Settings → Pages → Source 选 `Deploy from a branch` → Branch `personal-tool`、目录 `/(root)` → Save。（公开仓库免费；私有仓库需付费计划，否则改用 Netlify / Cloudflare Pages 拖拽 `social-gym/` 文件夹。）
+2. 约一两分钟后访问 `https://czhangc.github.io/claudecode/social-gym/`。
+3. **iPhone**：用 Safari 打开 → 分享按钮 → 添加到主屏幕。**Android**：用 Chrome 打开 → 菜单 → 安装应用 / 添加到主屏幕。
+4. 之后像 App 一样全屏打开，首次加载后断网也能用。数据存在该设备的浏览器里，换设备请用设置里的导出/导入。
+
+更新版本：改动后运行 `node build.js` 重新生成 `index.html` 和 `sw.js`（缓存版本号自动更新），提交即可；已安装的手机在联网打开时会拿到新版。
+
 ## 练习流程
 1. **捕捉信号**：分幕看场景 → 先写下你注意到的 → 揭示标注 → 诚实标记“注意到/漏掉”（累积成盲区地图）
 2. **抓住自动反应**：限时写下第一反应（不修改）→ 命名自动模式 → 记录感受与被触发的需求

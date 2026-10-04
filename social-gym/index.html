@@ -2,7 +2,15 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b5543a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Social Gym">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
 <title>Social Gym · 社交觉察训练</title>
 <style>
 :root{--bg:#faf7f2;--card:#fff;--ink:#2b2622;--mute:#7a7068;--line:#e6dfd4;--accent:#b5543a;--accent2:#3f6b5e;--soft:#f1ebe0}
@@ -10,12 +18,12 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
-header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left));display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .brand{font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:.5px}
 nav{display:flex;gap:4px;flex-wrap:wrap}
 nav a{padding:4px 10px;border-radius:999px;color:var(--mute);text-decoration:none;font-size:14px}
 nav a.on{background:var(--soft);color:var(--ink)}
-main{max-width:760px;margin:0 auto;padding:16px 16px 64px}
+main{max-width:760px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right)) calc(64px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
 h1{font-size:26px;margin:.6em 0 .3em}h2{font-size:19px;margin:1.6em 0 .5em}h3{font-size:16px;margin:1em 0 .4em}
 .lead{color:var(--mute)}.muted{color:var(--mute);font-size:14px}
 a{color:var(--accent2)}
@@ -1064,6 +1072,8 @@ window.EXPERIMENTS = [
 })();
 
 SG.start();
+// 仅在 https/localhost 下注册 Service Worker；file:// 或沙箱预览中静默跳过
+try { if ('serviceWorker' in navigator && /^(https:|http:)$/.test(location.protocol) && (location.protocol === 'https:' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname))) navigator.serviceWorker.register('sw.js').catch(function () {}); } catch (e) {}
 </script>
 </body>
 </html>
