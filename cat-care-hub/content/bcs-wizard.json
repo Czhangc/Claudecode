@@ -1,0 +1,58 @@
+{
+  "id": "bcs-wizard",
+  "status": "draft",
+  "todo": "TODO: 需人工核对（待核对清单 P3：选项措辞与分数映射，需对照 S03 官方体况评分图逐条核对）",
+  "sources": [{ "id": "S03" }, { "id": "S04" }],
+  "questions": [
+    {
+      "id": "ribs",
+      "demo": "ribs",
+      "action": "手掌平放，沿着它胸口两侧轻轻摸",
+      "prompt": "肋骨摸起来是什么感觉？",
+      "options": [
+        { "id": "ribs-visible", "label": "不用摸，就能看到肋骨", "score": 2 },
+        { "id": "ribs-bare", "label": "一摸就是骨头，几乎没有肉盖着", "score": 3 },
+        { "id": "ribs-thin-cover", "label": "能摸到，盖着薄薄一层", "score": 5 },
+        { "id": "ribs-press", "label": "要稍微用力按才摸得到", "score": 7 },
+        { "id": "ribs-none", "label": "用力按也很难摸到", "score": 9 }
+      ]
+    },
+    {
+      "id": "waist",
+      "demo": "top",
+      "action": "站在它正上方，往下看",
+      "prompt": "肋骨后面有「腰」吗？",
+      "options": [
+        { "id": "waist-extreme", "label": "腰非常细，骨盆两侧的骨头很突出", "score": 2 },
+        { "id": "waist-clear", "label": "腰线很明显", "score": 4 },
+        { "id": "waist-slight", "label": "能看出腰线，但不太明显", "score": 5 },
+        { "id": "waist-none", "label": "几乎看不出腰，身体两侧是直的", "score": 7 },
+        { "id": "waist-bulge", "label": "腰部向外鼓出来", "score": 9 }
+      ]
+    },
+    {
+      "id": "belly",
+      "demo": "side",
+      "action": "蹲下来，从侧面平视它的肚子",
+      "prompt": "肚子是什么形状？",
+      "options": [
+        { "id": "belly-tucked", "label": "肚子明显往上收，几乎没有脂肪", "score": 2 },
+        { "id": "belly-slight-tuck", "label": "肚子微微往上收", "score": 5 },
+        { "id": "belly-flat", "label": "肚子是平的，能看到一点垂肉", "score": 6 },
+        { "id": "belly-pad", "label": "肚子往下垂，有明显的脂肪垫", "score": 7 },
+        { "id": "belly-heavy", "label": "肚子明显下垂，走路会晃", "score": 9 }
+      ]
+    }
+  ],
+  "scoreDescriptions": {
+    "1": "非常瘦，骨头在远处就能看到。",
+    "2": "很瘦，肋骨、脊背骨头很容易看到。",
+    "3": "偏瘦，肋骨很容易摸到，几乎没有脂肪。",
+    "4": "匀称，肋骨能摸到，腰线明显。",
+    "5": "匀称，肋骨上有薄薄一层，腰线和腹部线条都在。",
+    "6": "稍胖，肋骨不太好摸，腰线不明显。",
+    "7": "超重，肋骨很难摸到，看不出腰，肚子有脂肪垫。",
+    "8": "肥胖，摸不到肋骨，肚子明显下垂。",
+    "9": "严重肥胖，身体两侧和肚子都有大量脂肪。"
+  }
+}

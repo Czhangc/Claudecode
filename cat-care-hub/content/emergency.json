@@ -1,0 +1,116 @@
+{
+  "id": "emergency-redlines",
+  "title": "什么时候必须马上去医院",
+  "items": [
+    {
+      "id": "R-URINE-STRAIN",
+      "level": "EMERGENCY",
+      "title": "反复用力排尿，但尿很少或尿不出来",
+      "detail": "反复进出猫砂盆、用力蹲着，却只尿出一点或完全没有。公猫风险更高，但母猫出现同样情况也要按急症处理。",
+      "sourceIds": [
+        "S11",
+        "S12"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-BREATHING",
+      "level": "EMERGENCY",
+      "title": "张嘴呼吸、呼吸困难，或腹部剧烈起伏",
+      "detail": "张着嘴呼吸、呼吸费力，或肚子剧烈起伏，都需要立即联系兽医。",
+      "sourceIds": [
+        "S13"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-TOXIN",
+      "level": "EMERGENCY",
+      "title": "已知或怀疑吃了有毒的东西",
+      "detail": "即使现在还没有任何症状，也要立即就医。",
+      "sourceIds": [
+        "S14"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-TRAUMA",
+      "level": "EMERGENCY",
+      "title": "高处坠落、车祸、被狗咬等严重外伤",
+      "detail": "请立即就医。",
+      "sourceIds": [
+        "S14"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-NOT-EATING",
+      "level": "EMERGENCY",
+      "title": "完全不吃不喝超过 1 天",
+      "detail": "今天就要让兽医看，约不到门诊就去急诊。超重的猫风险更高。",
+      "sourceIds": [
+        "S14",
+        "S16"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-VOMIT-REPEAT",
+      "level": "EMERGENCY",
+      "title": "1 小时内呕吐多次",
+      "detail": "短时间内反复呕吐，请立即联系兽医。",
+      "sourceIds": [
+        "S15"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    },
+    {
+      "id": "R-BLOOD-URINE",
+      "level": "URGENT_24H",
+      "title": "尿中带血",
+      "detail": "请在 24 小时内联系兽医并带去检查。如果同时反复用力排尿、尿很少，请按第一条立即就医。",
+      "sourceIds": [
+        "S17"
+      ],
+      "status": "verified",
+      "verifiedBy": "cccc",
+      "verifiedAt": "2026-10-29"
+    }
+  ],
+  "keywords": [
+    "尿不出",
+    "尿不出来",
+    "排尿困难",
+    "蹲猫砂盆",
+    "尿闭",
+    "张嘴呼吸",
+    "呼吸困难",
+    "喘",
+    "中毒",
+    "误食",
+    "有毒",
+    "坠楼",
+    "摔下",
+    "车祸",
+    "被咬",
+    "外伤",
+    "不吃不喝",
+    "不吃东西",
+    "呕吐",
+    "吐了好几次",
+    "尿血",
+    "血尿"
+  ]
+}
